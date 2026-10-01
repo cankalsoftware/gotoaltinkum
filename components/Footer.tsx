@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Waves, Mail, MapPin, Sun, Sparkles, Compass, Shield, Heart } from 'lucide-react';
+import { Waves, Mail, MapPin, Sun, Sparkles, Compass, Shield, Heart, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -28,6 +28,17 @@ export default function Footer() {
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>Altınkum, Didim 09270, Aydın Province, Türkiye</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
+                <a
+                  href="https://wa.me/905374909095"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-emerald-300 hover:text-white font-semibold"
+                >
+                  WhatsApp: 0537 490 90 95 (+90 537 490 90 95)
+                </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-sky-400 shrink-0" />
@@ -88,7 +99,6 @@ export default function Footer() {
               <li><a href="#news-events" className="hover:text-white transition-colors">Didim VegFest News</a></li>
               <li><a href="#travel-guide" className="hover:text-white transition-colors">Airport Transfers (BJV/ADB)</a></li>
               <li><a href="#faq" className="hover:text-white transition-colors">Traveler FAQ</a></li>
-              <li><a href="/llms.txt" className="text-slate-500 hover:text-slate-300 text-xs">AI llms.txt standard</a></li>
             </ul>
           </div>
         </div>

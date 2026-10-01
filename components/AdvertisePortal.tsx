@@ -12,8 +12,52 @@ export default function AdvertisePortal() {
   const [contactName, setContactName] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [feedbackMessage, setFeedbackMessage] = useState('');
 
   const emailAddress = 'info@gotoaltinkum.com';
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setFeedbackMessage('');
+
+    try {
+      const res = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          businessName,
+          businessCategory,
+          contactName,
+          phone,
+          message,
+          selectedTier,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setSubmitStatus('success');
+        setFeedbackMessage(data.message || 'Inquiry submitted successfully! Our team will contact you shortly.');
+        setBusinessName('');
+        setContactName('');
+        setPhone('');
+        setMessage('');
+      } else {
+        setSubmitStatus('error');
+        setFeedbackMessage(data.error || 'Failed to submit inquiry. Please email us directly.');
+      }
+    } catch (err: any) {
+      setSubmitStatus('error');
+      setFeedbackMessage('Network error occurred. Please use the direct email button below.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
@@ -61,22 +105,41 @@ export default function AdvertisePortal() {
             Connect directly with over 500,000+ British, European, and Turkish tourists planning their holidays in Altınkum and Didim.
           </p>
 
-          {/* Email Highlight Box */}
-          <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20">
-            <span className="text-xs sm:text-sm text-slate-200 font-medium">Official Commercial Contact:</span>
-            <a
-              href={`mailto:${emailAddress}`}
-              className="text-amber-300 font-black text-sm sm:text-base hover:text-white transition-colors underline decoration-amber-400/60 underline-offset-4"
-            >
-              {emailAddress}
-            </a>
-            <button
-              onClick={handleCopyEmail}
-              className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-bold transition-all border border-amber-400/30"
-            >
-              {copied ? <CheckCheck className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copied ? 'Copied to Clipboard!' : 'Copy Email'}</span>
-            </button>
+          {/* Direct Commercial Contacts (Email + WhatsApp) */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            {/* Email Box */}
+            <div className="inline-flex flex-wrap items-center justify-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20">
+              <span className="text-xs sm:text-sm text-slate-200 font-medium">Email:</span>
+              <a
+                href={`mailto:${emailAddress}`}
+                className="text-amber-300 font-black text-sm sm:text-base hover:text-white transition-colors underline decoration-amber-400/60 underline-offset-4"
+              >
+                {emailAddress}
+              </a>
+              <button
+                onClick={handleCopyEmail}
+                className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-bold transition-all border border-amber-400/30"
+              >
+                {copied ? <CheckCheck className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copied ? 'Copied!' : 'Copy Email'}</span>
+              </button>
+            </div>
+
+            {/* WhatsApp Box */}
+            <div className="inline-flex items-center gap-3 bg-emerald-950/80 backdrop-blur-md px-5 py-3 rounded-2xl border border-emerald-500/40 shadow-lg shadow-emerald-950/50">
+              <span className="text-xs sm:text-sm text-slate-200 font-medium">WhatsApp:</span>
+              <a
+                href="https://wa.me/905374909095?text=Hello%20GoToAltinkum,%20I%20would%20like%20to%20inquire%20about%20business%20advertising."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-300 font-black text-sm sm:text-base hover:text-white transition-colors flex items-center gap-1.5"
+              >
+                <span>0537 490 90 95</span>
+                <span className="bg-emerald-500 text-slate-950 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase">
+                  Chat Now
+                </span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -166,17 +229,46 @@ export default function AdvertisePortal() {
               Instant Business Advertising Inquiry
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 mt-1">
-              Fill out your business details below to generate a pre-formatted email to <strong className="text-amber-300 font-semibold">{emailAddress}</strong>.
+              Submit your business details below to notify our local partnership desk at <strong className="text-amber-300 font-semibold">{emailAddress}</strong>.
             </p>
           </div>
 
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              window.location.href = generateMailtoLink();
-            }}
-            className="space-y-4"
-          >
+          {submitStatus === 'success' && (
+            <div className="mb-6 p-4 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-200 flex items-start gap-3">
+              <CheckCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+              <div>
+                <strong className="block text-sm font-bold text-white">Inquiry Sent Successfully!</strong>
+                <p className="text-xs sm:text-sm text-emerald-200">{feedbackMessage}</p>
+                <div className="mt-2 flex gap-2">
+                  <a
+                    href="https://wa.me/905374909095?text=Hello%20GoToAltinkum,%20I%20just%20submitted%20an%20advertising%20inquiry."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors"
+                  >
+                    <span>Follow-up on WhatsApp (0537 490 90 95)</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {submitStatus === 'error' && (
+            <div className="mb-6 p-4 rounded-2xl bg-rose-500/20 border border-rose-400/40 text-rose-200 flex items-start justify-between gap-3">
+              <div>
+                <strong className="block text-sm font-bold text-white">Notice</strong>
+                <p className="text-xs sm:text-sm">{feedbackMessage}</p>
+              </div>
+              <a
+                href={generateMailtoLink()}
+                className="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white text-xs font-bold shrink-0"
+              >
+                Send via Mail App
+              </a>
+            </div>
+          )}
+
+          <form onSubmit={handleFormSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold text-slate-300 mb-1">
@@ -234,7 +326,7 @@ export default function AdvertisePortal() {
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="e.g. +90 532 ... or +44 7..."
+                  placeholder="e.g. 0537 ... or +44 7..."
                   className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400"
                 />
               </div>
@@ -255,15 +347,25 @@ export default function AdvertisePortal() {
 
             <div className="pt-2 flex flex-col sm:flex-row gap-3 items-center justify-between">
               <span className="text-xs text-slate-400">
-                Direct inquiries handled within 24 hours by our Didim advertising team.
+                Direct inquiries handled within 24 hours by our Didim advertising desk.
               </span>
 
               <button
                 type="submit"
-                className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-slate-950 font-black rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition-all hover:scale-105"
+                disabled={isSubmitting}
+                className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-slate-950 font-black rounded-xl text-sm shadow-xl flex items-center justify-center gap-2 transition-all hover:scale-105 disabled:opacity-70 disabled:hover:scale-100 cursor-pointer"
               >
-                <Send className="w-4 h-4" />
-                <span>Send Inquiry via Email (info@gotoaltinkum.com)</span>
+                {isSubmitting ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+                    <span>Submitting Inquiry...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Submit Inquiry</span>
+                  </>
+                )}
               </button>
             </div>
           </form>

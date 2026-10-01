@@ -50,16 +50,26 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
             </span>
           </div>
 
-          <div className="flex items-center space-x-3 sm:space-x-5 text-xs">
+          <div className="flex items-center space-x-2 sm:space-x-4 text-xs">
             <a
-              href="mailto:info@gotoaltinkum.com?subject=Advertising Inquiry for GoToAltinkum.com"
-              className="flex items-center gap-1 text-amber-300 hover:text-white font-semibold transition-colors bg-amber-500/20 hover:bg-amber-500/30 px-2.5 py-0.5 rounded-full border border-amber-400/30"
+              href="https://wa.me/905374909095?text=Hello%20GoToAltinkum,%20I%20would%20like%20to%20inquire%20about%20Didim%20and%20Altinkum."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-emerald-300 hover:text-white font-semibold transition-colors bg-emerald-500/20 hover:bg-emerald-500/30 px-2.5 py-0.5 rounded-full border border-emerald-400/30"
             >
-              <Mail className="w-3 h-3" />
-              <span>Advertise With Us: info@gotoaltinkum.com</span>
+              <Phone className="w-3 h-3 text-emerald-400" />
+              <span>WhatsApp: 0537 490 90 95</span>
             </a>
             <span className="text-sky-400 hidden sm:inline">|</span>
-            <span className="hidden sm:inline text-sky-200">Aydın, Türkiye 🇹🇷</span>
+            <a
+              href="mailto:info@gotoaltinkum.com?subject=Advertising Inquiry for GoToAltinkum.com"
+              className="hidden sm:flex items-center gap-1 text-amber-300 hover:text-white font-semibold transition-colors bg-amber-500/20 hover:bg-amber-500/30 px-2.5 py-0.5 rounded-full border border-amber-400/30"
+            >
+              <Mail className="w-3 h-3" />
+              <span>info@gotoaltinkum.com</span>
+            </a>
+            <span className="text-sky-400 hidden md:inline">|</span>
+            <span className="hidden md:inline text-sky-200">Aydın, Türkiye 🇹🇷</span>
           </div>
         </div>
       </div>

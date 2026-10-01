@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import StructuredData from '@/components/StructuredData';
+
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-YJXVC4Q4X8';
 
 export const viewport: Viewport = {
   themeColor: '#0369a1',
@@ -85,6 +88,14 @@ export const metadata: Metadata = {
     'geo.position': '37.3620;27.2764',
     'ICBM': '37.3620, 27.2764',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/apple-icon', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -96,9 +107,28 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         <StructuredData />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased selection:bg-amber-400 selection:text-slate-950">
+        {/* Google Analytics (GA4) */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
+
         {children}
       </body>
     </html>

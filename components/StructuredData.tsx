@@ -28,11 +28,13 @@ export default function StructuredData() {
         "url": "https://gotoaltinkum.com",
         "logo": "https://gotoaltinkum.com/images/altinkum-main-beach.jpg",
         "email": "info@gotoaltinkum.com",
+        "telephone": "+905374909095",
         "contactPoint": [
           {
             "@type": "ContactPoint",
             "contactType": "Tourist Information & Business Advertising",
             "email": "info@gotoaltinkum.com",
+            "telephone": "+905374909095",
             "availableLanguage": ["English", "Turkish", "German"]
           }
         ]

@@ -11,8 +11,11 @@ export interface BeachItem {
   facilities: string[];
   bestFor: string;
   image: string;
+  galleryImages: string[];
+  colorTheme: string;
   coordinates: { lat: number; lng: number };
   googleMapsUrl: string;
+  googleMapsPhotosUrl: string;
 }
 
 export interface HistoricalSite {
@@ -36,6 +39,12 @@ export interface NewsEventItem {
   summary: string;
   readTime: string;
   author: string;
+  image: string;
+  location: string;
+  fullArticle: string;
+  keyHighlights: string[];
+  eventSchedule: string;
+  visitorAdvice: string[];
 }
 
 export interface DiningSpot {
@@ -78,7 +87,10 @@ export const ALTINKUM_QUICK_FACTS = {
     { code: "BJV", name: "Milas-Bodrum Airport", distance: "85 km", travelTime: "approx. 1 hour" },
     { code: "ADB", name: "Izmir Adnan Menderes Airport", distance: "140 km", travelTime: "approx. 1 hour 30 mins" }
   ],
-  ancientOrigins: "Ancient Didyma, home to the sacred Oracle Temple of Apollo, second only to Delphi in the ancient world."
+  ancientOrigins: "Ancient Didyma, home to the sacred Oracle Temple of Apollo, second only to Delphi in the ancient world.",
+  contactPhone: "+90 537 490 90 95",
+  contactPhoneRaw: "05374909095",
+  whatsAppUrl: "https://wa.me/905374909095"
 };
 
 export const BEACHES_DATA: BeachItem[] = [
@@ -94,9 +106,16 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["Sunbeds & Umbrellas", "Yalı Caddesi Beachfront Restaurants", "Water Sports (Jet Ski, Banana)", "Showers & Changing Cabins", "Lifeguard on duty", "Wheelchair Accessible Paths"],
     bestFor: "Families, shallow swimming, water sports, vibrant beachfront dining",
-    image: "/images/altinkum-main-beach.jpg",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
+    ],
+    colorTheme: "Turquoise Sea & Golden Sand",
     coordinates: { lat: 37.3571, lng: 27.2798 },
-    googleMapsUrl: "https://maps.google.com/?q=Altinkum+Beach+Didim"
+    googleMapsUrl: "https://maps.google.com/?q=Altinkum+Beach+Didim",
+    googleMapsPhotosUrl: "https://www.google.com/maps/search/?api=1&query=Alt%C4%B1nkum+Plaj%C4%B1+Didim+Ayd%C4%B1n"
   },
   {
     id: "second-beach-2nd-koy",
@@ -110,9 +129,16 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["Beach Clubs", "Lounge Chairs & Beanbags", "Paddleboard Rental", "Seafood Cafes", "Sunset Viewpoint"],
     bestFor: "Couples, relaxing reads, sunset cocktails, peaceful swimming",
-    image: "/images/boat-trip.jpg",
+    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1520454974749-611b7248ffdb?auto=format&fit=crop&w=1200&q=80"
+    ],
+    colorTheme: "Crystal Aquamarine & Coastal Cliffs",
     coordinates: { lat: 37.3512, lng: 27.2685 },
-    googleMapsUrl: "https://maps.google.com/?q=Didim+2.+Koy"
+    googleMapsUrl: "https://maps.google.com/?q=Didim+2.+Koy",
+    googleMapsPhotosUrl: "https://www.google.com/maps/search/?api=1&query=Didim+2.+Koy+Plaj%C4%B1+Alt%C4%B1nkum"
   },
   {
     id: "third-beach-3rd-koy",
@@ -126,9 +152,16 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["PADI Diving Center", "Windsurfing & Parasailing", "Marina Walkway Access", "Beach Cafes", "Ample Parking"],
     bestFor: "Scuba divers, snorkelers, adrenaline seekers, marina visitors",
-    image: "/images/d-marin-didim-marina.jpg",
+    image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+    ],
+    colorTheme: "Deep Azure & Marina Coast",
     coordinates: { lat: 37.3489, lng: 27.2574 },
-    googleMapsUrl: "https://maps.google.com/?q=Didim+3.+Koy"
+    googleMapsUrl: "https://maps.google.com/?q=Didim+3.+Koy",
+    googleMapsPhotosUrl: "https://www.google.com/maps/search/?api=1&query=Didim+3.+Koy+Plaj%C4%B1"
   },
   {
     id: "cennet-koyu-paradise-bay",
@@ -142,9 +175,16 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["Natural shade", "Boat Tour Anchorage Point", "Snorkeling reefs", "Eco-friendly beach kiosks"],
     bestFor: "Nature lovers, boat trips, underwater photography, quiet sunbathing",
-    image: "/images/boat-trip.jpg",
+    image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80"
+    ],
+    colorTheme: "Electric Turquoise & Green Pine Hills",
     coordinates: { lat: 37.3685, lng: 27.2341 },
-    googleMapsUrl: "https://maps.google.com/?q=Cennet+Koyu+Didim"
+    googleMapsUrl: "https://maps.google.com/?q=Cennet+Koyu+Didim",
+    googleMapsPhotosUrl: "https://www.google.com/maps/search/?api=1&query=Cennet+Koyu+Didim"
   },
   {
     id: "akbuk-bay",
@@ -158,9 +198,16 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["Seaside Fish Taverns", "Harbor Promenade", "Boutique Hotels", "Sunbed Rentals", "Children's Playgrounds"],
     bestFor: "Peaceful retreats, asthma & health holidays, scenic dinners by the water",
-    image: "/images/altinkum-main-beach.jpg",
+    image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1476673160081-cf065607f449?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+    ],
+    colorTheme: "Glassy Turquoise & Mountain Pines",
     coordinates: { lat: 37.4082, lng: 27.4246 },
-    googleMapsUrl: "https://maps.google.com/?q=Akbuk+Didim"
+    googleMapsUrl: "https://maps.google.com/?q=Akbuk+Didim",
+    googleMapsPhotosUrl: "https://www.google.com/maps/search/?api=1&query=Akb%C3%BCk+Sahili+Didim"
   },
   {
     id: "dalyanaki-tavsanburnu",
@@ -174,9 +221,16 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["Caravan & Tent Camping", "Picnic Tables", "Showers & Electricity", "Mini Market", "Lifeguard"],
     bestFor: "Campers, nature lovers, shady family picnics, historical exploration",
-    image: "/images/boat-trip.jpg",
+    image: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=1200&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80"
+    ],
+    colorTheme: "Emerald Pine Forest & Marine Cove",
     coordinates: { lat: 37.4110, lng: 27.2180 },
-    googleMapsUrl: "https://maps.google.com/?q=Tavsanburnu+Tabiat+Parki+Didim"
+    googleMapsUrl: "https://maps.google.com/?q=Tavsanburnu+Tabiat+Parki+Didim",
+    googleMapsPhotosUrl: "https://www.google.com/maps/search/?api=1&query=Tav%C5%9Fanburnu+Tabiat+Park%C4%B1+Didim"
   }
 ];
 
@@ -246,51 +300,145 @@ export const NEWS_AND_EVENTS_DATA: NewsEventItem[] = [
     id: "didim-vegfest-2026",
     title: "Didim VegFest: Türkiye's Premier Vegan & Gastronomy Festival Around Apollo",
     category: "Festival",
-    date: "Annual Spring Event (April)",
+    date: "Annual Spring Event (Mid-April)",
     badge: "Major Festival",
     summary: "Thousands of international and domestic food lovers gather in the historic streets surrounding the Temple of Apollo for 4 days of plant-based culinary masterclasses, Aegean olive oil tastings, and live music.",
     readTime: "3 min read",
-    author: "GoToAltinkum Editorial"
+    author: "GoToAltinkum Editorial",
+    image: "/images/vegfest-didim.jpg",
+    location: "Historic Temple of Apollo Quarter, Didim",
+    eventSchedule: "Thursday through Sunday (10:00 AM – 22:00 PM)",
+    fullArticle: `Didim VegFest is officially recognized as Türkiye's first and largest plant-based culinary and cultural festival. Set against the magnificent backdrop of the ancient Temple of Apollo, the festival celebrates the rich Aegean tradition of wild herb harvesting and cold-pressed extra virgin olive oil cuisine.
+
+Over four vibrant days, the historical quarter transforms into an aromatic open-air market filled with over 200 artisanal stalls. Renowned master chefs, botanical botanists, and nutrition experts conduct live cooking demonstrations, showcasing regional delicacies such as stuffed squash blossoms (Kabak Çiçeği Dolması), samphire salad (Deniz Börülcesi), and wild golden thistle stew (Şevketi Bostan).
+
+Beyond the food, VegFest features non-stop live entertainment including traditional Aegean folk dances, panel discussions on ethical sustainability, vegan leather craft workshops, and open-air sunset acoustic concerts under the towering 2,500-year-old marble columns of Apollo. Entrance to the festival grounds is completely free for all visitors.`,
+    keyHighlights: [
+      "Over 200 food & artisan stalls showcasing Aegean plant-based recipes",
+      "Free cooking masterclasses with celebrity Turkish and European chefs",
+      "Traditional Aegean wild herb harvesting workshops & olive oil tastings",
+      "Evening live concerts and DJ sets beneath the illuminated Temple of Apollo"
+    ],
+    visitorAdvice: [
+      "Arrive before noon to avoid parking congestion; frequent Dolmuş minibuses run directly from Altınkum beachfront.",
+      "Bring cash as some local village artisan stalls do not accept international credit cards.",
+      "Wear comfortable walking shoes for cobblestone streets surrounding the archaeological site."
+    ]
   },
   {
     id: "d-marin-summer-regatta",
     title: "D-Marin Didim Aegean Yachting Regatta & Sunset Concert Series",
     category: "Nightlife",
-    date: "Summer Season",
+    date: "Summer Season (June – August)",
     badge: "Yachting & Music",
     summary: "Superyachts and international sailors dock at D-Marin's 580-berth marina for the annual Aegean Trophy race, accompanied by open-air acoustic jazz and DJ performances on the marina promenade.",
-    readTime: "2 min read",
-    author: "Maritime Correspondent"
+    readTime: "3 min read",
+    author: "Maritime Correspondent",
+    image: "/images/d-marin-didim-marina.jpg",
+    location: "D-Marin Didim Yacht Club & Harbor Promenade",
+    eventSchedule: "Weekly Races & Nightly Sunset Sessions (18:00 – Midnight)",
+    fullArticle: `D-Marin Didim stands as one of the most sophisticated 5-gold-anchor superyacht marinas in the Eastern Mediterranean, offering 580 berths and a world-class waterfront promenade. Every summer, the marina hosts the prestigious Aegean Trophy Regatta, drawing elite sailing teams and maritime enthusiasts from the UK, Greece, Germany, and Turkey.
+
+The event combines thrilling offshore sailboat racing with high-end lifestyle entertainment. Spectators gather at the waterfront cafes and the elevated Yacht Club Sky Lounge to watch the boats unfurl their colorful spinnakers against the backdrop of the setting Aegean sun.
+
+As twilight falls, the promenade comes alive with the Summer Sunset Concert Series. International jazz ensembles, acoustic guitarists, and sunset chillout DJs perform along the palm-lined docks. Visitors can stroll the illuminated piers, browse boutique designer shops, and enjoy fresh Mediterranean fine dining with panoramic views over multi-million-dollar yachts.`,
+    keyHighlights: [
+      "International sailboat races across the Didim-Bodrum Aegean corridor",
+      "Open-access waterfront promenade with luxury yacht spotting",
+      "Free live open-air jazz concerts and acoustic sunset sessions",
+      "Fine dining seafood and cocktail bars at the D-Marin Yacht Club"
+    ],
+    visitorAdvice: [
+      "Reserve dinner tables at least 24 hours in advance on race weekends.",
+      "The marina breakwater lighthouse offers the best vantage point for sunset photos.",
+      "Free parking is available in the main D-Marin visitor lot."
+    ]
   },
   {
     id: "apollo-night-illumination",
     title: "Nighttime Illumination & Guided Moonlight Walks at Temple of Apollo",
     category: "Culture",
-    date: "Nightly in Summer",
+    date: "Nightly Throughout Summer (June – September)",
     badge: "Must Experience",
     summary: "Experience the monumental columns of Didyma under energy-efficient architectural golden spotlights, with accredited archaeological storytelling sessions under the starry Aegean sky.",
     readTime: "4 min read",
-    author: "Didim Culture Desk"
+    author: "Didim Culture Desk",
+    image: "/images/apollo-night-lights.jpg",
+    location: "Temple of Apollo Archaeological Sanctuary, Didyma",
+    eventSchedule: "Every evening from 20:30 to 23:30",
+    fullArticle: `The Ministry of Culture and Tourism alongside the Didim Archaeological Directorate have unveiled a state-of-the-art golden LED illumination system across the sacred sanctuary of Didyma. The monumental columns, vaulted stone oracle tunnels, and the iconic carved stone Medusa head now glow magnificently against the dark Aegean night sky.
+
+The new night-visiting experience allows travelers to escape daytime summer heat and explore the sanctuary in a mystical, serene atmosphere. Licensed multi-lingual archaeological guides lead romantic 'Moonlight Walks', recounting the enigmatic prophecies delivered by the Oracle Priestess of Branchidae to world conquerors including Alexander the Great and Emperor Diocletian.
+
+On full moon nights, the sanctuary hosts intimate classical acoustic recitals where the natural acoustic resonance of the Adyton (the sacred inner courtyard) brings ancient Greek hymns and classical flute compositions to life under the open Aegean stars.`,
+    keyHighlights: [
+      "Monumental 20-meter Hellenistic columns illuminated with warm architectural lighting",
+      "Guided atmospheric moonlight walks through the underground stone oracle tunnels",
+      "Special full-moon acoustic chamber music performances inside the sanctuary",
+      "Spectacular night astrophotography opportunities with zero daytime heat"
+    ],
+    visitorAdvice: [
+      "Museum Card (MüzeKart) and standard daytime entrance tickets can be validated at the night gate.",
+      "Tripods and mobile night-mode cameras are permitted for personal photography.",
+      "Stop at the historic open-air tea gardens overlooking the glowing columns after your walk."
+    ]
   },
   {
     id: "altinkum-promenade-renewal",
     title: "New Eco-Friendly Pedestrian Boulevard & Cycling Path Along Yalı Caddesi",
     category: "Local News",
-    date: "Updated for 2026 Season",
+    date: "Completed for 2026 Season",
     badge: "Visitor Update",
     summary: "The Didim Municipality has completed the pedestrianization and palm tree landscaping along Altınkum's beachfront, adding free high-speed public Wi-Fi, modern shower stations, and smooth cycling lanes.",
     readTime: "2 min read",
-    author: "Local Municipality Desk"
+    author: "Local Municipality Desk",
+    image: "/images/altinkum-main-beach.jpg",
+    location: "Yalı Caddesi Beach Boulevard (1st, 2nd & 3rd Bays)",
+    eventSchedule: "Open 24/7 (Pedestrian & Cyclist Zone)",
+    fullArticle: `The Didim Municipality has officially unveiled the multimillion-lira revitalization of Altınkum's premier coastal corridor, Yalı Caddesi. The comprehensive project transformed the 3-kilometer waterfront spanning from the 1st Bay Main Beach to the 3rd Bay Marina into a fully pedestrianized eco-friendly lifestyle promenade.
+
+Key improvements include a dedicated solar-powered bicycle and electric scooter lane, smooth tactile paving for baby strollers and wheelchair accessibility, automated mist-cooling stations to refresh beachgoers during hot afternoons, and modern freshwater shower and changing modules.
+
+Furthermore, the municipality has activated free high-speed public Wi-Fi access points along the entire beach boulevard, complemented by USB charging solar benches and smart trash-sorting bins. Over 200 Mediterranean date palms and blooming bougainvillea flowerbeds have been planted, cementing Altınkum's reputation as one of the cleanest and most walkable resort promenades in the Mediterranean.`,
+    keyHighlights: [
+      "Completely traffic-free, safe pedestrianized seaside walking boulevard",
+      "Dedicated 3km bicycle & e-scooter lane connecting all 3 bays",
+      "Free high-speed Municipal public Wi-Fi along the beachfront",
+      "Wheelchair-accessible ramps extending down to the water's edge"
+    ],
+    visitorAdvice: [
+      "Bicycle and electric scooter rentals are available via mobile app docking hubs along the promenade.",
+      "The best time for a scenic morning jog is between 07:00 and 09:00 before beach umbrellas open."
+    ]
   },
   {
     id: "saturday-didim-bazaar-guide",
     title: "The Ultimate Guide to Didim's Saturday & Wednesday Open Markets",
     category: "Guide",
-    date: "Every Wednesday & Saturday",
+    date: "Every Wednesday (Didim Center) & Saturday (Altınkum)",
     badge: "Shopping Guide",
     summary: "Discover where to buy fresh sun-ripened Aegean figs, cold-pressed Memecik olive oil, mountain sage, Turkish spices, authentic leather goods, and Turkish cotton towels directly from local farmers and artisans.",
-    readTime: "5 min read",
-    author: "GoToAltinkum Team"
+    readTime: "4 min read",
+    author: "GoToAltinkum Team",
+    image: "/images/didim-bazaar-market.jpg",
+    location: "Didim Central Covered Market (Wed) & Altınkum Market Ground (Sat)",
+    eventSchedule: "08:00 AM – 19:00 PM (Weekly)",
+    fullArticle: `No holiday to Altınkum is complete without experiencing the intoxicating sights, aromas, and sounds of a traditional Turkish open bazaar. Didim hosts two major weekly markets: the massive Wednesday Central Bazaar located near the Didim Otogar (bus station), and the vibrant Saturday Altınkum Market catering directly to seaside vacationers.
+
+The food pavilion is a paradise for foodies. Local village farmers from the surrounding Aydın agricultural valley sell sun-drenched Aegean produce harvested hours earlier: sweet black figs, juicy pomegranates, giant watermelons, local goat cheeses, wild mountain thyme (*kekik*), and bottles of unfiltered, peppery extra-virgin Memecik olive oil.
+
+The textile and artisan section offers exceptional value on world-renowned Turkish cotton towels (*Peshtemals*), bed linens, handwoven kilim rugs, authentic leather jackets, and evil eye (*Nazar Boncuğu*) glass ornaments. Vendors warmly invite shoppers with slices of sweet oranges and cups of hot Turkish tea (*Çay*).`,
+    keyHighlights: [
+      "Over 400 local farmers and artisan stalls offering fresh Aegean goods",
+      "World-famous Turkish cotton peshtemal towels at factory-direct prices",
+      "Authentic village herbs, pine honeycomb, and cold-pressed olive oils",
+      "Friendly, safe bargaining culture with English-speaking local merchants"
+    ],
+    visitorAdvice: [
+      "Polite bargaining is customary in the clothing and souvenir section (aim for 10–20% below starting price), but food prices are fixed and clearly displayed per kilogram.",
+      "Take small Turkish Lira cash denominations for easy change.",
+      "Dolmuş minibuses with 'Pazar' signs run constantly from all hotel zones directly to the market gates."
+    ]
   }
 ];
 
