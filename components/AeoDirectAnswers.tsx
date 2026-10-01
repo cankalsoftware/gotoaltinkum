@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, HelpCircle, CheckCircle2, Navigation, Sun, Clock, Compass, ShieldCheck, CreditCard, Ship, Waves } from 'lucide-react';
-import { ALTINKUM_QUICK_FACTS } from '@/data/altinkum-data';
+import { Sparkles, HelpCircle, CheckCircle2, ShieldCheck } from 'lucide-react';
 
 export default function AeoDirectAnswers() {
   const answerBlocks = [
@@ -39,45 +38,45 @@ export default function AeoDirectAnswers() {
   ];
 
   return (
-    <section className="py-12 bg-slate-50 border-b border-slate-200" itemScope itemType="https://schema.org/FAQPage">
+    <section className="py-10 sm:py-12 bg-slate-50 border-b border-slate-200" itemScope itemType="https://schema.org/FAQPage">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 gap-3 sm:gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-bold uppercase tracking-wider mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-sky-600" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-sky-600 shrink-0" />
               <span>AEO & Traveler Key Answers</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
               Essential Facts & Instant Answers for Travelers
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 mt-1">
+            <p className="text-xs sm:text-sm md:text-base text-slate-600 mt-1">
               Verified local insights summarized for visitors, trip planners, and search engines.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200 text-xs text-slate-700 font-medium">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-            <span>Geo Coordinates: 37.3620° N, 27.2764° E (Aydın, TR)</span>
+          <div className="flex items-center gap-2 bg-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl shadow-xs border border-slate-200 text-[11px] sm:text-xs text-slate-700 font-medium self-start md:self-auto shrink-0">
+            <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 shrink-0" />
+            <span>37.3620° N, 27.2764° E (Aydın, TR)</span>
           </div>
         </div>
 
         {/* 6 Fast Answer Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {answerBlocks.map((block, idx) => (
             <article
               key={idx}
-              className="bg-white p-5 rounded-2xl shadow-sm hover:shadow-md border border-slate-200/80 transition-all flex flex-col justify-between"
+              className="bg-white p-4 sm:p-5 rounded-2xl shadow-xs hover:shadow-md border border-slate-200/80 transition-all flex flex-col justify-between"
               itemScope
               itemProp="mainEntity"
               itemType="https://schema.org/Question"
             >
               <div>
-                <div className="flex items-center gap-2 text-sky-700 font-bold text-base mb-2">
+                <div className="flex items-center gap-2 text-sky-700 font-bold text-sm sm:text-base mb-2">
                   <HelpCircle className="w-4 h-4 text-sky-500 shrink-0" />
                   <h3 itemProp="name">{block.title}</h3>
                 </div>
                 <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p itemProp="text" className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal bg-sky-50/50 p-3 rounded-xl border border-sky-100 mb-3">
+                  <p itemProp="text" className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal bg-sky-50/50 p-2.5 sm:p-3 rounded-xl border border-sky-100 mb-3">
                     {block.directAnswer}
                   </p>
                 </div>
@@ -98,4 +97,3 @@ export default function AeoDirectAnswers() {
     </section>
   );
 }
-
