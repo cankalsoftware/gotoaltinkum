@@ -7,8 +7,9 @@ import BeachExplorer from '@/components/BeachExplorer';
 import HistorySection from '@/components/HistorySection';
 import NewsAndEvents from '@/components/NewsAndEvents';
 import DiningAndNightlife from '@/components/DiningAndNightlife';
-import DayTripsAndActivities from '@/components/DayTripsAndActivities';
 import HotelsGuide from '@/components/HotelsGuide';
+import DayTripsAndActivities from '@/components/DayTripsAndActivities';
+import VisitorEssentialsHub from '@/components/VisitorEssentialsHub';
 import TravelGuideAndTransport from '@/components/TravelGuideAndTransport';
 import AdvertisePortal from '@/components/AdvertisePortal';
 import FaqSection from '@/components/FaqSection';
@@ -29,6 +30,7 @@ export default function HomePage() {
         <DiningAndNightlife />
         <HotelsGuide />
         <DayTripsAndActivities />
+        <VisitorEssentialsHub />
         <TravelGuideAndTransport />
         <AdvertisePortal />
         <FaqSection />

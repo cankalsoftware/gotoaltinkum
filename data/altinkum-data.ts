@@ -118,7 +118,75 @@ export interface FaqItem {
   question: string;
   shortAnswer: string;
   fullAnswer: string;
-  category: 'General' | 'Beaches' | 'History' | 'Transport' | 'Advertising';
+  category: 'General' | 'Beaches' | 'History' | 'Transport' | 'Advertising' | 'Practical';
+}
+
+export interface EmergencyService {
+  name: string;
+  turkishName: string;
+  phone: string;
+  description: string;
+  category: 'Hospital' | 'Police' | 'Rescue' | 'Pharmacy';
+  address: string;
+  hours: string;
+}
+
+export interface DolmusRoute {
+  routeNumber: string;
+  from: string;
+  to: string;
+  frequency: string;
+  duration: string;
+  operatingHours: string;
+  keyStops: string[];
+  priceEstimate: string;
+}
+
+export interface WeeklyBazaar {
+  name: string;
+  day: string;
+  location: string;
+  bestFor: string;
+  highlights: string[];
+  timing: string;
+  tips: string;
+}
+
+export interface FerryConnection {
+  destination: string;
+  country: string;
+  departurePort: string;
+  duration: string;
+  frequency: string;
+  operator: string;
+  visaRequirements: string;
+  highlight: string;
+}
+
+export interface ItineraryDay {
+  dayNumber: number;
+  theme: string;
+  morning: string;
+  afternoon: string;
+  evening: string;
+  proTip: string;
+}
+
+export interface CuratedItinerary {
+  id: string;
+  title: string;
+  duration: string;
+  badge: string;
+  targetAudience: string;
+  summary: string;
+  days: ItineraryDay[];
+}
+
+export interface PracticalTravelTip {
+  category: string;
+  title: string;
+  advice: string;
+  iconType: string;
 }
 
 export const ALTINKUM_QUICK_FACTS = {
@@ -910,9 +978,345 @@ export const FAQ_DATA: FaqItem[] = [
     category: "General"
   },
   {
+    question: "What currency is used in Altınkum and are contactless cards accepted?",
+    shortAnswer: "The official currency is the Turkish Lira (TRY / ₺). Contactless credit/debit cards are universally accepted in hotels, supermarkets, and restaurants.",
+    fullAnswer: "While British Pounds (GBP), Euros (EUR), and US Dollars (USD) are widely understood, paying in Turkish Lira (TRY) guarantees the best prices. Visa, Mastercard, Apple Pay, and contactless cards work everywhere from beach clubs to corner stores. It is recommended to carry a small amount of cash in Lira for local dolmuş minibuses and traditional open-air bazaars.",
+    category: "Practical"
+  },
+  {
+    question: "How do you get around Didim and Altınkum without a rental car?",
+    shortAnswer: "Frequent local Dolmuş (minibus) shuttles run every 5 to 10 minutes between Altınkum beaches, Didim town center, Temple of Apollo, D-Marin Marina, and Akbük.",
+    fullAnswer: "Didim has an affordable and dependable public minibus network (Dolmuş). Minibuses have clearly marked signs in their front windshields (e.g. 'Altınkum - Çarşı - Otogar' or 'Didim - Akbük'). Fares are paid in cash when boarding (typically ₺20 - ₺50). Yellow metered taxis are also available 24/7 at taxi ranks throughout the resort.",
+    category: "Transport"
+  },
+  {
+    question: "Can you take a ferry from Didim to Greek Islands like Kos or Samos?",
+    shortAnswer: "Yes, fast passenger catamarans operate directly from D-Marin Didim Port to Kos Island (Greece) and neighboring Dodecanese islands during summer.",
+    fullAnswer: "The high-speed ferry takes approximately 45–60 minutes from D-Marin Didim to Kos Port. EU passport holders travel seamlessly, while UK and other international travelers can take advantage of the Greek Islands Fast-Track Express Visa / Visa-on-Arrival scheme at the port. Ensure your passport has at least 6 months validity.",
+    category: "Transport"
+  },
+  {
     question: "How can local Didim businesses advertise on GoToAltinkum.com?",
     shortAnswer: "Local businesses can partner and advertise by emailing info@gotoaltinkum.com or completing the online commercial inquiry form on GoToAltinkum.com.",
     fullAnswer: "GoToAltinkum.com is the leading digital portal connecting hundreds of thousands of international tourists with verified local Didim and Altınkum businesses. We offer featured listings, banner placements, social promotions, and direct lead generation for hotels, restaurants, boat tour operators, transfer companies, car rentals, real estate agencies, and health clinics. Simply email info@gotoaltinkum.com for our media kit and rates.",
     category: "Advertising"
   }
 ];
+
+export const EMERGENCY_SERVICES: EmergencyService[] = [
+  {
+    name: "Didim State Hospital",
+    turkishName: "Didim Devlet Hastanesi",
+    phone: "112 / +90 256 811 57 00",
+    description: "24/7 Full emergency department, foreign patient multilingual coordination desk, ambulances, and intensive care.",
+    category: "Hospital",
+    address: "Efeler Mah. Ege Cad. Didim, Aydın",
+    hours: "Open 24 Hours / 7 Days"
+  },
+  {
+    name: "Unified Emergency Dispatch (All Services)",
+    turkishName: "112 Acil Çağrı Merkezi",
+    phone: "112",
+    description: "Unified English-speaking emergency hotline for Ambulance, Police (Polis), Gendarmerie (Jandarma), and Fire (İtfaiye).",
+    category: "Rescue",
+    address: "National Unified Dispatch (Free Call)",
+    hours: "24/7 Emergency Line"
+  },
+  {
+    name: "Didim Tourist Police & Zabıta",
+    turkishName: "Didim Turizm Zabıtası & Emniyet",
+    phone: "+90 256 811 38 78",
+    description: "Dedicated tourist security bureau assisting visitors with consumer rights, lost property, translation, and promenade security.",
+    category: "Police",
+    address: "Altınkum Yalı Caddesi Police Station, Didim",
+    hours: "08:00 - 00:00 Daily"
+  },
+  {
+    name: "Aegean Coast Guard & Marine Rescue",
+    turkishName: "Sahil Güvenlik Komutanlığı",
+    phone: "158 / 112",
+    description: "Maritime emergency rescue, swimmer safety, and coast guard patrol covering Altınkum bays and D-Marin waters.",
+    category: "Rescue",
+    address: "D-Marin Coast Guard Station, Didim",
+    hours: "24/7 Maritime Watch"
+  },
+  {
+    name: "Didim On-Duty Rotating Pharmacies",
+    turkishName: "Nöbetçi Eczaneler",
+    phone: "+90 256 811 12 12",
+    description: "24/7 rotating night and weekend pharmacy system dispensing prescription medications, baby supplies, and first aid.",
+    category: "Pharmacy",
+    address: "Rotates nightly across Didim & Altınkum central locations",
+    hours: "Night Shift & Weekend 24 Hours"
+  }
+];
+
+export const DOLMUS_ROUTES: DolmusRoute[] = [
+  {
+    routeNumber: "Line 1",
+    from: "Altınkum Main Beach (Yalı Cad.)",
+    to: "Didim Town Center & Otogar (Bus Station)",
+    frequency: "Every 5 - 7 minutes",
+    duration: "10 minutes",
+    operatingHours: "06:30 - 01:30 Daily",
+    keyStops: ["Altınkum Beach", "Atatürk Boulevard", "Cumhuriyet Square", "Didim Grand Mosque (Camii)", "Intercity Otogar"],
+    priceEstimate: "₺25 - ₺35 per person"
+  },
+  {
+    routeNumber: "Line 2",
+    from: "Altınkum Beach Promenade",
+    to: "Temple of Apollo & Yenihisar",
+    frequency: "Every 10 minutes",
+    duration: "15 minutes",
+    operatingHours: "07:00 - 23:30 Daily",
+    keyStops: ["Altınkum Harbour", "Yenihisar Bazaar", "Didim Stadium", "Apollo Temple Ruins & Medusa Statue"],
+    priceEstimate: "₺30 - ₺40 per person"
+  },
+  {
+    routeNumber: "Line 3",
+    from: "Altınkum 1st Bay",
+    to: "3rd Bay & D-Marin Yacht Club",
+    frequency: "Every 12 minutes",
+    duration: "8 minutes",
+    operatingHours: "07:30 - 00:00 Daily",
+    keyStops: ["1st Bay Main Beach", "2nd Bay", "3rd Bay Water Sports", "Didim Marina Pier & Yacht Club"],
+    priceEstimate: "₺25 - ₺35 per person"
+  },
+  {
+    routeNumber: "Line 4",
+    from: "Didim Center (Camii)",
+    to: "Mavişehir Sunset Harbor & Night Bazaar",
+    frequency: "Every 15 minutes",
+    duration: "20 minutes",
+    operatingHours: "08:00 - 00:30 Daily",
+    keyStops: ["Didim Center", "Aquasis Resort Road", "Mavişehir Harbor", "Mavişehir Sunset Fish Taverns"],
+    priceEstimate: "₺35 - ₺45 per person"
+  },
+  {
+    routeNumber: "Line 5",
+    from: "Didim Otogar / Altınkum",
+    to: "Akbük Bay & Pine Coastline",
+    frequency: "Every 20 minutes",
+    duration: "25 minutes",
+    operatingHours: "07:00 - 23:00 Daily",
+    keyStops: ["Didim Otogar", "Fevzipaşa", "Sahte Cennet Bay", "Akbük Pier", "Akbük Promenade"],
+    priceEstimate: "₺45 - ₺60 per person"
+  }
+];
+
+export const WEEKLY_BAZAARS: WeeklyBazaar[] = [
+  {
+    name: "Didim Central Wednesday Farmers Market",
+    day: "Every Wednesday",
+    location: "Behind Didim Central Bus Station (Yeni Mahalle)",
+    bestFor: "Organic Aegean olives, cold-pressed olive oil, fresh figs, cheeses, herbs & spices",
+    highlights: ["Locally harvested Aydın figs & dried fruits", "Fresh village pomegranate molasses (Nar Ekşisi)", "Huge variety of fresh Turkish herbs and seasonal fruits"],
+    timing: "08:00 - 19:30",
+    tips: "Arrive before 11:00 AM for the freshest produce and cooler morning temperatures. Carry small Turkish Lira cash notes."
+  },
+  {
+    name: "Didim Yenihisar Saturday Grand Bazaar",
+    day: "Every Saturday",
+    location: "Yenihisar Covered Market Complex, Didim",
+    bestFor: "Fashion apparel, beachwear, leather sandals, Turkish cotton towels (Peshtemal), souvenirs & ceramics",
+    highlights: ["Handmade Turkish ceramic bowls & Evil Eye charms", "High quality 100% Turkish cotton beach towels", "Bargaining and friendly tea hospitality"],
+    timing: "08:30 - 20:00",
+    tips: "Polite bargaining is welcome. Vendors speak English and German. Grab a freshly rolled hot Gözleme pancake from village stalls inside."
+  },
+  {
+    name: "Akbük Friday Seaside Market",
+    day: "Every Friday",
+    location: "Akbük Town Center Promenade",
+    bestFor: "Artisanal honey, handmade soaps, Aegean pine crafts, and coastal beach clothing",
+    highlights: ["Pine honey harvested from Didim's surrounding mountains", "Relaxed coastal village atmosphere", "Fresh bakery treats and farm cheeses"],
+    timing: "09:00 - 18:30",
+    tips: "Combine your market visit with a relaxed seafood lunch along Akbük's scenic bay."
+  },
+  {
+    name: "Mavişehir Sunset & Artisan Night Market",
+    day: "Every Evening (Summer Season)",
+    location: "Mavişehir Waterfront Promenade",
+    bestFor: "Handcrafted jewelry, seashell souvenirs, evening sunset photography & fresh fish dining",
+    highlights: ["Famous Didim sunset viewpoint over the Aegean horizon", "Open-air night shopping under fairy lights", "Fresh grilled sardines and Aegean calamari"],
+    timing: "18:00 - 00:30 Daily",
+    tips: "The ultimate sunset spot in Didim. Arrive around 19:30 to watch the sun sink into the sea before exploring the market stalls."
+  }
+];
+
+export const FERRY_CONNECTIONS: FerryConnection[] = [
+  {
+    destination: "Kos Island (Greece)",
+    country: "Greece / Dodecanese Islands",
+    departurePort: "D-Marin Didim International Ferry Terminal",
+    duration: "45 - 60 Minutes (Fast Catamaran)",
+    frequency: "Daily morning departures (May - October)",
+    operator: "Aegean Ferry Lines / Dentur Didim",
+    visaRequirements: "EU Passport / Valid Schengen Visa or Fast-Track Greek Island Visa-on-Arrival scheme",
+    highlight: "Explore Kos Old Town, Hippocrates Asklepion temple, Venetian castle, and Greek island tavernas on a direct day trip."
+  },
+  {
+    destination: "Samos Island & Kalymnos",
+    country: "Greece / North Aegean & Dodecanese",
+    departurePort: "D-Marin Didim / Kuşadası Port Connection",
+    duration: "75 Minutes",
+    frequency: "3 to 4 times weekly during high season",
+    operator: "Meander / Turyol Aegean Connections",
+    visaRequirements: "Passport with minimum 6 months validity & Schengen / Greek Island Visa",
+    highlight: "Picturesque neoclassical harbors, Pythagoras cave, world-renowned Samos sweet wine, and turquoise climbing coves."
+  }
+];
+
+export const CURATED_ITINERARIES: CuratedItinerary[] = [
+  {
+    id: "1-day-express",
+    title: "1-Day 'Best of Altınkum & Apollo' Express",
+    duration: "1 Day (12 Hours)",
+    badge: "Must-See Highlights",
+    targetAudience: "Day trippers, cruise visitors & first-time travelers",
+    summary: "Experience the essential highlights: stand beneath the colossal columns of ancient Didyma, swim at Altınkum's 1st Bay golden beach, and dine on fresh grilled sea bass at sunset.",
+    days: [
+      {
+        dayNumber: 1,
+        theme: "Ancient Gods & Golden Sands",
+        morning: "09:00 - Visit the magnificent Temple of Apollo (Didyma). Photograph the world-famous Medusa stone relief and walk down the subterranean oracle corridors before crowds arrive.",
+        afternoon: "13:00 - Head to Altınkum 1st Bay Main Beach. Savor a chilled Efes and Turkish mezes at a beachfront cafe, followed by a warm swim in the calm, shallow turquoise waters.",
+        evening: "18:30 - Take a stroll along D-Marin Marina pier to watch the Aegean sunset, followed by a seaside dinner of fresh Aegean sea bream and Aegean olive oil mezes.",
+        proTip: "Wear comfortable walking shoes for the marble steps of Apollo, then change into swimwear for Altınkum beach."
+      }
+    ]
+  },
+  {
+    id: "3-day-explorer",
+    title: "3-Day 'Aegean Turquoise & Ancient Wonders' Explorer",
+    duration: "3 Days / 2 Nights",
+    badge: "Most Popular",
+    targetAudience: "Weekend holidaymakers & cultural explorers",
+    summary: "A balanced blend of ancient history, full-day turquoise boat cruises, water sports, and local night bazaar dining.",
+    days: [
+      {
+        dayNumber: 1,
+        theme: "Altınkum Shoreline & Sunset Promenade",
+        morning: "Check in to your resort, head to Altınkum Main Beach (1. Koy), rent a sunbed with parasol, and walk 50m into the warm crystal sea.",
+        afternoon: "Try jet skiing or parasailing at 3rd Bay Beach, followed by refreshing Turkish ice cream (Dondurma) along Yalı Caddesi.",
+        evening: "Sunset seafood dinner on the pedestrianized promenade with live acoustic Aegean music.",
+        proTip: "3rd Bay is the best bay for water sports and diving schools in Didim."
+      },
+      {
+        dayNumber: 2,
+        theme: "The Ancient Ionian Triad: Didyma, Miletus & Priene",
+        morning: "Explore the Temple of Apollo Oracle, then take a 20-minute drive to Miletus Ancient City to climb the 15,000-seat Greco-Roman theatre and Faustina Baths.",
+        afternoon: "Continue to mountain-perched Priene with its dramatic cliffside Temple of Athena overlooking the Meander delta.",
+        evening: "Visit Mavişehir Sunset Market for grilled sea bass and handcrafted silver and evil-eye souvenirs.",
+        proTip: "Get a Museum Pass (MüzeKart) to cover entrance to Didyma, Miletus, and Priene."
+      },
+      {
+        dayNumber: 3,
+        theme: "Full-Day Turquoise Cove Boat Cruise",
+        morning: "10:00 - Board an Aegean wooden Gulet boat from Altınkum harbour. Cruise along the rugged coastline.",
+        afternoon: "Anchor in secluded turquoise bays including Paradise Bay (Cennet Koyu) and Aquarium Bay. Enjoy an onboard lunch of grilled chicken, pasta, and fresh salad with plenty of swim stops.",
+        evening: "Return to harbour at 17:00, freshen up, and enjoy cocktail hour at D-Marin Yacht Club.",
+        proTip: "Book boat tours 1 day in advance through verified harbour cooperative boats."
+      }
+    ]
+  },
+  {
+    id: "7-day-ultimate",
+    title: "7-Day 'Ultimate Didim & Turquoise Coast' Vacation",
+    duration: "7 Days / 6 Nights",
+    badge: "Comprehensive",
+    targetAudience: "Families, couples & long-stay vacationers",
+    summary: "The definitive one-week holiday: private beaches, Lake Bafa wildlife reserves, day trip to Ephesus, Greek island fast ferry, and authentic Turkish thermal wellness.",
+    days: [
+      {
+        dayNumber: 1,
+        theme: "Welcome to Golden Altınkum",
+        morning: "Arrival transfer from Bodrum (BJV) or Izmir (ADB) airport. Settle into hotel and unpack.",
+        afternoon: "Relax on 2nd Bay Beach with crystal shallow waters.",
+        evening: "Welcome dinner at Altınkum harbour tavern with cold mezes and raki.",
+        proTip: "Pre-book airport VIP transfers for zero stress arrival."
+      },
+      {
+        dayNumber: 2,
+        theme: "Sacred Oracle of Didyma & Bazaar Exploration",
+        morning: "Guided tour of the Temple of Apollo and Medusa relief.",
+        afternoon: "Experience the vibrant Didim Wednesday or Saturday Grand Bazaar for olives and Turkish cotton towels.",
+        evening: "Relaxation at your resort's spa & Turkish Hamam (bath).",
+        proTip: "Do the Turkish Hamam on Day 2 to prep your skin for an even holiday tan!"
+      },
+      {
+        dayNumber: 3,
+        theme: "5-Bay Aegean Boat Expedition",
+        morning: "Full-day boat trip across untouched hidden coves and marine caves.",
+        afternoon: "Snorkeling with colorful Aegean fish in Aquarium Bay.",
+        evening: "Casual street food dinner: try traditional Adana Kebabs and Turkish pide.",
+        proTip: "Bring snorkeling mask and underwater camera."
+      },
+      {
+        dayNumber: 4,
+        theme: "Greek Island Day Trip to Kos",
+        morning: "09:00 - Fast catamaran from D-Marin Didim across to Kos Island, Greece.",
+        afternoon: "Cycle through Kos Town, visit the Tree of Hippocrates, and enjoy authentic Greek souvlaki & tzatziki.",
+        evening: "18:00 - Return ferry to Didim. Relaxed evening at D-Marin promenade.",
+        proTip: "Remember your passport and check visa requirements in advance."
+      },
+      {
+        dayNumber: 5,
+        theme: "Lake Bafa (Herakleia) & Ancient Latmos Mountains",
+        morning: "Scenic 35-minute drive to Lake Bafa Nature Reserve. View flamingos, pelicans, and Byzantine monastery island ruins.",
+        afternoon: "Traditional village breakfast feast under ancient olive groves in Kapıkırı village among bizarre granite boulders.",
+        evening: "Sunset walk through Tavşanburnu Nature Park pine forests.",
+        proTip: "Try the local wild honey and roasted village bread at Lake Bafa."
+      },
+      {
+        dayNumber: 6,
+        theme: "Day Excursion to Ephesus (UNESCO World Heritage)",
+        morning: "Take an organized day tour to Ephesus (1 hr 15 min drive) to marvel at the Library of Celsus and Great Theatre.",
+        afternoon: "Visit the House of the Virgin Mary and the historic Greek wine village of Şirince.",
+        evening: "Farewell dinner party in Didim with live music and Aegean seafood.",
+        proTip: "Start Ephesus tours early in the morning to beat the heat."
+      },
+      {
+        dayNumber: 7,
+        theme: "Final Golden Sand Sunbathe & Souvenir Shopping",
+        morning: "Morning swim at Cennet Koyu (Paradise Bay) with glassy clear emerald waters.",
+        afternoon: "Pick up local Turkish delight (Lokum), Aydın fig jams, and ceramics along Yalı Caddesi.",
+        evening: "Departure transfer to Milas-Bodrum or Izmir Airport with unforgettable Aegean memories.",
+        proTip: "Turkish delight boxes make the best gifts for friends and family back home."
+      }
+    ]
+  }
+];
+
+export const PRACTICAL_TRAVEL_TIPS: PracticalTravelTip[] = [
+  {
+    category: "Money & Currency",
+    title: "Currency & Contactless Payments",
+    advice: "Turkish Lira (TRY / ₺) is standard. Visa, Mastercard, contactless cards, and Apple Pay are accepted in 95% of shops, restaurants, and hotels. Always decline dynamic currency conversion (DCC) at card terminals and choose to be charged in TRY for the best interbank rate. Keep ₺200-₺500 cash for dolmuş buses and street markets.",
+    iconType: "wallet"
+  },
+  {
+    category: "Connectivity",
+    title: "Mobile Internet & eSIMs",
+    advice: "Fast 4G/5G mobile coverage is available throughout Didim and Altınkum. Major networks are Turkcell, Vodafone Turkey, and Türk Telekom. Tourist SIM cards are sold at airports and Didim center shops. Digital eSIMs (e.g. Airalo, Holafly) can be activated before flying for instant data upon landing.",
+    iconType: "wifi"
+  },
+  {
+    category: "Electricity",
+    title: "Power Plugs & Voltage",
+    advice: "Türkiye uses standard European Type C and Type F round two-pin plugs running at 230V, 50Hz. UK travelers need a standard 3-pin to 2-pin European travel adapter plug.",
+    iconType: "zap"
+  },
+  {
+    category: "Water & Health",
+    title: "Drinking Water & Wellness",
+    advice: "Tap water is chlorinated and safe for showering, brushing teeth, and cooking, but bottled spring water is universally used and recommended for daily drinking. Chilled 0.5L and 5L water bottles are readily available for a few Liras everywhere. Use SPF 30+ sunscreen during peak midday hours.",
+    iconType: "droplet"
+  },
+  {
+    category: "Tipping Culture",
+    title: "Tipping & Service Etiquette",
+    advice: "Tipping is customary in restaurants and taverns. 10% is standard for good service. You can leave cash on the table or add tip to card machines. For taxi drivers, rounding up the fare to the nearest ₺20 or ₺50 note is appreciated.",
+    iconType: "heart"
+  }
+];
+

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, HelpCircle, CheckCircle2, Navigation, Sun, Clock, Compass, ShieldCheck } from 'lucide-react';
+import { Sparkles, HelpCircle, CheckCircle2, Navigation, Sun, Clock, Compass, ShieldCheck, CreditCard, Ship, Waves } from 'lucide-react';
 import { ALTINKUM_QUICK_FACTS } from '@/data/altinkum-data';
 
 export default function AeoDirectAnswers() {
@@ -23,13 +23,23 @@ export default function AeoDirectAnswers() {
     },
     {
       title: "What is the historical significance of Didim?",
-      directAnswer: "Didim is home to the ancient Temple of Apollo at Didyma—the second most important oracle center of antiquity after Delphi—and the birthplace of philosophy in neighboring Miletus.",
+      directAnswer: "Didim is home to the ancient Temple of Apollo at Didyma—the second most important oracle sanctuary of antiquity after Delphi—and neighboring ancient Miletus and Priene.",
       highlights: ["Towering 20m high Hellenistic marble columns", "Famous stone-carved Medusa protective relief", "Connected to ancient Miletus via the 20km Sacred Way"]
+    },
+    {
+      title: "What currency is used & are cards accepted?",
+      directAnswer: "Turkish Lira (TRY / ₺) is standard. Contactless credit cards, debit cards, Apple Pay, and Google Pay are universally accepted in 95% of restaurants, beach clubs, and hotels.",
+      highlights: ["Contactless payments supported everywhere", "Pay in TRY at card machines for best rates", "Keep ₺200 cash for dolmuş minibuses and bazaars"]
+    },
+    {
+      title: "Can you take a ferry to Greek Islands?",
+      directAnswer: "Yes! High-speed passenger catamarans operate from D-Marin Didim International Port directly to Kos Island (Greece) in 45 minutes with Fast-Track Greek Visa-on-Arrival.",
+      highlights: ["Daily morning departures in summer (May-Oct)", "Direct day trips to Kos Old Town & Hippocrates Tree", "Valid passport with 6 months validity required"]
     }
   ];
 
   return (
-    <section className="py-12 bg-slate-50 border-b border-slate-200">
+    <section className="py-12 bg-slate-50 border-b border-slate-200" itemScope itemType="https://schema.org/FAQPage">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
           <div>
@@ -51,21 +61,26 @@ export default function AeoDirectAnswers() {
           </div>
         </div>
 
-        {/* 4 Fast Answer Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* 6 Fast Answer Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {answerBlocks.map((block, idx) => (
             <article
               key={idx}
               className="bg-white p-5 rounded-2xl shadow-sm hover:shadow-md border border-slate-200/80 transition-all flex flex-col justify-between"
+              itemScope
+              itemProp="mainEntity"
+              itemType="https://schema.org/Question"
             >
               <div>
                 <div className="flex items-center gap-2 text-sky-700 font-bold text-base mb-2">
                   <HelpCircle className="w-4 h-4 text-sky-500 shrink-0" />
-                  <h3>{block.title}</h3>
+                  <h3 itemProp="name">{block.title}</h3>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal bg-sky-50/50 p-3 rounded-xl border border-sky-100 mb-3">
-                  {block.directAnswer}
-                </p>
+                <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                  <p itemProp="text" className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal bg-sky-50/50 p-3 rounded-xl border border-sky-100 mb-3">
+                    {block.directAnswer}
+                  </p>
+                </div>
               </div>
 
               <ul className="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
@@ -83,3 +98,4 @@ export default function AeoDirectAnswers() {
     </section>
   );
 }
+

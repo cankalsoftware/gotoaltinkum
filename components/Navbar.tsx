@@ -56,6 +56,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
   }, []);
 
   const navLinks = [
+    { label: 'Visitor Hub', href: '#visitor-hub' },
     { label: 'Beaches', href: '#beaches' },
     { label: 'Apollo & History', href: '#history' },
     { label: 'News & Events', href: '#news-events' },

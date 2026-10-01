@@ -12,6 +12,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${baseUrl}/#live-pulse`,
+      lastModified,
+      changeFrequency: 'hourly',
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/#visitor-hub`,
+      lastModified,
+      changeFrequency: 'daily',
+      priority: 0.95,
+    },
+    {
       url: `${baseUrl}/#beaches`,
       lastModified,
       changeFrequency: 'weekly',
@@ -21,6 +33,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/#history`,
       lastModified,
       changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/#hotels`,
+      lastModified,
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     {

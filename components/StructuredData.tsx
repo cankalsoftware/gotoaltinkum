@@ -1,5 +1,5 @@
 import React from 'react';
-import { FAQ_DATA, ALTINKUM_QUICK_FACTS, BEACHES_DATA, HISTORY_DATA } from '@/data/altinkum-data';
+import { FAQ_DATA, ALTINKUM_QUICK_FACTS, BEACHES_DATA, HISTORY_DATA, EMERGENCY_SERVICES } from '@/data/altinkum-data';
 
 export default function StructuredData() {
   const jsonLd = {
@@ -10,7 +10,7 @@ export default function StructuredData() {
         "@id": "https://gotoaltinkum.com/#website",
         "url": "https://gotoaltinkum.com",
         "name": "GoToAltinkum - Official Altınkum & Didim Tourist Guide",
-        "description": "Comprehensive visitor guide, local news, history of Temple of Apollo, beaches, restaurants, and advertising portal for Altınkum, Didim, Türkiye.",
+        "description": "Comprehensive visitor guide, local news, history of Temple of Apollo, beaches, restaurants, transport, and advertising portal for Altınkum, Didim, Türkiye.",
         "inLanguage": "en-US",
         "publisher": {
           "@id": "https://gotoaltinkum.com/#organization"
@@ -29,6 +29,10 @@ export default function StructuredData() {
         "logo": "https://gotoaltinkum.com/images/altinkum-main-beach.jpg",
         "email": "info@gotoaltinkum.com",
         "telephone": "+905374909095",
+        "sameAs": [
+          "https://www.facebook.com/gotoaltinkum",
+          "https://www.instagram.com/gotoaltinkum"
+        ],
         "contactPoint": [
           {
             "@type": "ContactPoint",
@@ -91,6 +95,39 @@ export default function StructuredData() {
         "publicAccess": true
       },
       {
+        "@type": "TouristAttraction",
+        "@id": "https://gotoaltinkum.com/#d-marin-didim",
+        "name": "D-Marin Didim Yacht Club & Marina",
+        "description": "World-class 580-berth luxury marina with international ferry port to Greek Islands (Kos & Samos), fine dining, and yacht club facilities.",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 37.3456,
+          "longitude": 27.2608
+        },
+        "isAccessibleForFree": true,
+        "publicAccess": true
+      },
+      {
+        "@type": "Hospital",
+        "@id": "https://gotoaltinkum.com/#didim-state-hospital",
+        "name": "Didim State Hospital (Didim Devlet Hastanesi)",
+        "telephone": "+902568115700",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Efeler Mah. Ege Cad.",
+          "addressLocality": "Didim",
+          "addressRegion": "Aydın",
+          "postalCode": "09270",
+          "addressCountry": "TR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 37.3785,
+          "longitude": 27.2690
+        },
+        "openingHours": "Mo-Su 00:00-24:00"
+      },
+      {
         "@type": "FAQPage",
         "@id": "https://gotoaltinkum.com/#faq",
         "mainEntity": FAQ_DATA.map((faq) => ({
@@ -115,24 +152,30 @@ export default function StructuredData() {
           {
             "@type": "ListItem",
             "position": 2,
+            "name": "Visitor Hub",
+            "item": "https://gotoaltinkum.com/#visitor-hub"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
             "name": "Beaches",
             "item": "https://gotoaltinkum.com/#beaches"
           },
           {
             "@type": "ListItem",
-            "position": 3,
+            "position": 4,
             "name": "History & Temple of Apollo",
             "item": "https://gotoaltinkum.com/#history"
           },
           {
             "@type": "ListItem",
-            "position": 4,
-            "name": "Local News & Events",
-            "item": "https://gotoaltinkum.com/#news-events"
+            "position": 5,
+            "name": "Hotels & Resorts",
+            "item": "https://gotoaltinkum.com/#hotels"
           },
           {
             "@type": "ListItem",
-            "position": 5,
+            "position": 6,
             "name": "Advertise Local Business",
             "item": "https://gotoaltinkum.com/#advertise"
           }
@@ -148,3 +191,4 @@ export default function StructuredData() {
     />
   );
 }
+
