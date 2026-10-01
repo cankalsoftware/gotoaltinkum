@@ -56,6 +56,11 @@ export interface DiningSpot {
   description: string;
   priceLevel: '€' | '€€' | '€€€';
   recommendedDish: string;
+  image: string;
+  rating: string;
+  reviewsCount: string;
+  tag: string;
+  googleMapsUrl: string;
 }
 
 export interface AdPackage {
@@ -66,6 +71,47 @@ export interface AdPackage {
   targetAudience: string;
   features: string[];
   popular?: boolean;
+}
+
+export interface LocalOperator {
+  name: string;
+  type: string;
+  website: string;
+  phone?: string;
+  location: string;
+  badge: string;
+}
+
+export interface DayTripItem {
+  id: string;
+  title: string;
+  badge: string;
+  image: string;
+  duration: string;
+  description: string;
+  highlights: string[];
+  localOperators: LocalOperator[];
+  directInquiryQuery: string;
+}
+
+export interface HotelItem {
+  id: string;
+  name: string;
+  badge: string;
+  category: 'Ultra Luxury' | 'Beachfront' | 'Marina & Boutique' | 'Family Resort';
+  stars: number;
+  rating: string;
+  reviewsCount: string;
+  location: string;
+  tagline: string;
+  description: string;
+  highlights: string[];
+  image: string;
+  galleryImages: string[];
+  priceRange: string;
+  websiteUrl: string;
+  googleMapsUrl: string;
+  features: string[];
 }
 
 export interface FaqItem {
@@ -106,11 +152,11 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["Sunbeds & Umbrellas", "Yalı Caddesi Beachfront Restaurants", "Water Sports (Jet Ski, Banana)", "Showers & Changing Cabins", "Lifeguard on duty", "Wheelchair Accessible Paths"],
     bestFor: "Families, shallow swimming, water sports, vibrant beachfront dining",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/beach-altinkum-1st-koy.jpg",
     galleryImages: [
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
+      "/images/beach-altinkum-1st-koy.jpg",
+      "/images/altinkum-main-beach.jpg",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
     ],
     colorTheme: "Turquoise Sea & Golden Sand",
     coordinates: { lat: 37.3571, lng: 27.2798 },
@@ -129,11 +175,11 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["Beach Clubs", "Lounge Chairs & Beanbags", "Paddleboard Rental", "Seafood Cafes", "Sunset Viewpoint"],
     bestFor: "Couples, relaxing reads, sunset cocktails, peaceful swimming",
-    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/beach-didim-2nd-koy.jpg",
     galleryImages: [
+      "/images/beach-didim-2nd-koy.jpg",
       "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1520454974749-611b7248ffdb?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1200&q=80"
     ],
     colorTheme: "Crystal Aquamarine & Coastal Cliffs",
     coordinates: { lat: 37.3512, lng: 27.2685 },
@@ -152,11 +198,11 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["PADI Diving Center", "Windsurfing & Parasailing", "Marina Walkway Access", "Beach Cafes", "Ample Parking"],
     bestFor: "Scuba divers, snorkelers, adrenaline seekers, marina visitors",
-    image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/beach-didim-3rd-koy.jpg",
     galleryImages: [
+      "/images/beach-didim-3rd-koy.jpg",
       "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80"
     ],
     colorTheme: "Deep Azure & Marina Coast",
     coordinates: { lat: 37.3489, lng: 27.2574 },
@@ -175,11 +221,11 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["Natural shade", "Boat Tour Anchorage Point", "Snorkeling reefs", "Eco-friendly beach kiosks"],
     bestFor: "Nature lovers, boat trips, underwater photography, quiet sunbathing",
-    image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/beach-cennet-koyu.jpg",
     galleryImages: [
+      "/images/beach-cennet-koyu.jpg",
       "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80"
     ],
     colorTheme: "Electric Turquoise & Green Pine Hills",
     coordinates: { lat: 37.3685, lng: 27.2341 },
@@ -198,11 +244,11 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["Seaside Fish Taverns", "Harbor Promenade", "Boutique Hotels", "Sunbed Rentals", "Children's Playgrounds"],
     bestFor: "Peaceful retreats, asthma & health holidays, scenic dinners by the water",
-    image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/beach-akbuk-bay.jpg",
     galleryImages: [
+      "/images/beach-akbuk-bay.jpg",
       "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1476673160081-cf065607f449?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1476673160081-cf065607f449?auto=format&fit=crop&w=1200&q=80"
     ],
     colorTheme: "Glassy Turquoise & Mountain Pines",
     coordinates: { lat: 37.4082, lng: 27.4246 },
@@ -221,11 +267,11 @@ export const BEACHES_DATA: BeachItem[] = [
     blueFlag: true,
     facilities: ["Caravan & Tent Camping", "Picnic Tables", "Showers & Electricity", "Mini Market", "Lifeguard"],
     bestFor: "Campers, nature lovers, shady family picnics, historical exploration",
-    image: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/beach-tavsanburnu-park.jpg",
     galleryImages: [
+      "/images/beach-tavsanburnu-park.jpg",
       "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
     ],
     colorTheme: "Emerald Pine Forest & Marine Cove",
     coordinates: { lat: 37.4110, lng: 27.2180 },
@@ -446,32 +492,47 @@ export const DINING_HIGHLIGHTS: DiningSpot[] = [
   {
     id: "yali-aegean-fish",
     name: "Sunset Fish Taverns of Yalı Caddesi",
-    type: "Seafood & Aegean Meze Tavern",
+    type: "Aegean Seafood & Raki Tavern",
     specialty: "Fresh Grilled Sea Bass, Calamari, Deniz Börülcesi & Raki",
-    location: "Altınkum Beachfront Promenade",
-    description: "Tables set right along the gentle Aegean waves with lantern light, serving fresh daily catches from local Didim fishermen alongside chilled Aegean meze plates.",
+    location: "Altınkum Beachfront (Yalı Caddesi)",
+    description: "Candlelit tables set directly along the gentle golden waves. Savor daily fresh catch from Didim fishermen alongside chilled Aegean mezes, warm garlic butter prawns, and ice-cold raki.",
     priceLevel: "€€",
-    recommendedDish: "Levrek Izgara (Grilled Sea Bass) with Girit Ezmesi and warm garlic butter butterflied prawns."
+    recommendedDish: "Levrek Izgara (Charcoal Grilled Sea Bass) with Girit Ezmesi & hot butter garlic prawns.",
+    image: "/images/dining-seafood-tavern.jpg",
+    rating: "★ 4.8 / 5.0",
+    reviewsCount: "1,200+ Reviews",
+    tag: "🌊 Beachfront Sunset",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Seafood+Restaurants+Yal%C4%B1+Caddesi+Alt%C4%B1nkum+Didim"
   },
   {
     id: "apollo-village-breakfast",
     name: "Didyma Garden Serpme Kahvaltı",
-    type: "Traditional Turkish Village Breakfast",
-    specialty: "Village Olives, Fried Hellim, Menemen, Homemade Fig Jam",
-    location: "Temple of Apollo Quarter, Didim",
-    description: "Shaded garden courtyards surrounded by pomegranate and olive trees, offering endless hot Turkish tea and 20+ dishes of organic homemade local farm foods.",
+    type: "Traditional Turkish Village Feast",
+    specialty: "Village Olives, Sizzling Menemen, Hellim, Fresh Honeycomb",
+    location: "Temple of Apollo Historical Quarter",
+    description: "Rustic stone courtyards shaded by ancient olive and bougainvillea trees near the Oracle Temple. Enjoy a 20+ dish organic Turkish breakfast feast with endless freshly brewed Turkish tea.",
     priceLevel: "€",
-    recommendedDish: "Aegean Menemen with Didim goat cheese, hot Turkish flatbread, and fresh honeycomb."
+    recommendedDish: "Aegean Menemen with Didim goat cheese, hot sesame simit, and homemade fig jam.",
+    image: "/images/dining-village-breakfast.jpg",
+    rating: "★ 4.9 / 5.0",
+    reviewsCount: "850+ Reviews",
+    tag: "🌿 Temple Garden Courtyard",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Serpme+Kahvalt%C4%B1+Didim+Apollon"
   },
   {
     id: "d-marin-yacht-club-dining",
     name: "The Marina Yacht Club & Sky Lounge",
-    type: "Fine Dining & Mediterranean Fusion",
-    specialty: "Dry-Aged Steaks, Seafood Risotto, Signature Sunset Cocktails",
-    location: "D-Marin Didim Marina Promenade",
-    description: "Upscale waterfront dining with sweeping views across luxury superyachts, ambient lounge music, and an extensive international wine cellar.",
+    type: "Fine Dining & Sunset Cocktails",
+    specialty: "Lobster Tagliolini, Dry-Aged Steaks & Signature Cocktails",
+    location: "D-Marin Didim Superyacht Promenade",
+    description: "Sophisticated waterfront dining with panoramic views over luxury superyachts. Features Mediterranean fusion cuisine, international wine pairings, and ambient sunset chillout DJ sessions.",
     priceLevel: "€€€",
-    recommendedDish: "Aegean Lobster Tagliolini and Truffle Beef Tenderloin."
+    recommendedDish: "Aegean Seafood Tagliolini with giant king prawns & Truffle Beef Tenderloin.",
+    image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
+    rating: "★ 4.7 / 5.0",
+    reviewsCount: "920+ Reviews",
+    tag: "🛥️ Superyacht Promenade",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=D-Marin+Didim+Yacht+Club+Restaurant"
   }
 ];
 
@@ -520,6 +581,300 @@ export const AD_PACKAGES: AdPackage[] = [
       "Prominent placement on all mobile and desktop visitor guides",
       "Dedicated account manager & priority seasonal promotions"
     ]
+  }
+];
+
+export const DAY_TRIPS_DATA: DayTripItem[] = [
+  {
+    id: "didim-5-bays-gulet-cruise",
+    title: "Daily Didim 5-Bays Wooden Gulet Cruise",
+    badge: "Top Rated Marine Excursion",
+    image: "/images/boat-trip.jpg",
+    duration: "Full Day (10:00 – 17:00)",
+    description: "Sail on a handcrafted wooden Turkish Gulet departing directly from Altınkum Harbor. Anchor in crystal-clear turquoise bays (Paradise Bay, Aquarium Bay, Dalyanaki, and Academy Bay) with swimming, snorkeling, and a fresh grilled lunch served on deck.",
+    highlights: [
+      "5 secluded turquoise swimming stops with crystal visibility",
+      "Fresh grilled Aegean lunch on deck (Sea Bass / Chicken, Pasta & Salad)",
+      "Shaded lounging decks, sun mattresses, and music onboard"
+    ],
+    directInquiryQuery: "Hello, I would like to book or inquire about the Daily 5-Bays Gulet Boat Tour in Altınkum.",
+    localOperators: [
+      {
+        name: "Altınkum Gezi Tekneleri Kooperatifi (Harbor Fleet)",
+        type: "Official Cooperative Fleet",
+        location: "Altınkum 1. Koy Harbor Pier",
+        website: "https://www.google.com/maps/search/?api=1&query=Alt%C4%B1nkum+Gezi+Tekneleri+Kooperatifi+Didim",
+        badge: "Official Fleet"
+      },
+      {
+        name: "M/S Poseidon & Didim Gulet Cruises",
+        type: "Daily Excursion Boat",
+        location: "Altınkum Main Pier",
+        website: "https://www.google.com/maps/search/?api=1&query=Didim+Boat+Tours+Alt%C4%B1nkum",
+        badge: "TripAdvisor Top Choice"
+      }
+    ]
+  },
+  {
+    id: "aegean-scuba-diving-expeditions",
+    title: "Aegean Scuba Diving & Snorkeling Safaris",
+    badge: "PADI & CMAS Certified",
+    image: "/images/d-marin-didim-marina.jpg",
+    duration: "Half Day / Full Day (09:30 – 16:30)",
+    description: "Discover the mesmerizing underwater world of the Aegean Sea. Featuring 30-meter crystal visibility, natural underwater caves, historic amphora fields, and vibrant sea bream and octopus marine life.",
+    highlights: [
+      "Beginner Discovery Dives with 1-on-1 certified PADI instructor",
+      "PADI Open Water & Advanced diver certification courses",
+      "Undersea GoPro photography and all equipment included"
+    ],
+    directInquiryQuery: "Hello, I would like to inquire about Scuba Diving and Snorkeling trips in Didim.",
+    localOperators: [
+      {
+        name: "Didim Dalış Merkezi (Didim Scuba Diving Center)",
+        type: "PADI 5-Star Dive Center",
+        location: "Didim 3. Koy & D-Marin Hub",
+        website: "https://www.google.com/maps/search/?api=1&query=Didim+Dalis+Merkezi+Scuba+Diving",
+        badge: "5-Star PADI"
+      },
+      {
+        name: "D-Marin Water Sports & Diving Academy",
+        type: "Marina Marine Hub",
+        location: "D-Marin Yacht Club Promenade",
+        website: "https://www.google.com/maps/search/?api=1&query=D-Marin+Didim+Water+Sports",
+        badge: "Certified Facility"
+      }
+    ]
+  },
+  {
+    id: "ephesus-sirince-pamukkale-excursions",
+    title: "Ephesus Ancient Metropolis & Şirince Village Day Trip",
+    badge: "UNESCO World Heritage",
+    image: "/images/temple-apollo.jpg",
+    duration: "Full Day Excursion (07:30 – 18:30)",
+    description: "Travel through classical antiquity with an accredited archaeological guide. Explore the Library of Celsus, the Grand Roman Amphitheater, the House of the Virgin Mary, followed by fruit wine tasting in picturesque Şirince village.",
+    highlights: [
+      "Walk the marble avenues of one of antiquity's greatest capitals",
+      "Pilgrimage visit to the sacred House of the Virgin Mary",
+      "Comfortable air-conditioned coach transfer with hotel pickup"
+    ],
+    directInquiryQuery: "Hello, I want to book the Ephesus and Sirince Village guided day trip from Altınkum.",
+    localOperators: [
+      {
+        name: "Orion Travel & Excursions Didim",
+        type: "TURSAB Licensed Tour Operator",
+        location: "Yalı Caddesi, Altınkum",
+        website: "https://www.google.com/maps/search/?api=1&query=Orion+Travel+Didim+Excursions",
+        badge: "TURSAB Licensed"
+      },
+      {
+        name: "Aegean Heritage Tours & Transfers",
+        type: "Private & Group Tours",
+        location: "Didim Center",
+        website: "https://www.google.com/maps/search/?api=1&query=Didim+Tour+Operators+Excursions",
+        badge: "Top Rated"
+      }
+    ]
+  },
+  {
+    id: "lake-bafa-latmos-jeep-safari",
+    title: "Lake Bafa, Latmos Rock Art & 4x4 Jeep Safari",
+    badge: "Nature & Prehistoric Art",
+    image: "/images/boat-trip.jpg",
+    duration: "Full Day Safari (09:00 – 16:30)",
+    description: "Ascend into the mystical five-fingered Latmos Mountains (Beşparmak). Explore 8,000-year-old Neolithic cave rock art, the Byzantine ruins of ancient Heraclea, flamingo bird sanctuaries on Lake Bafa, and rustic village gastronomy.",
+    highlights: [
+      "Open-top 4x4 off-road adventure through pine mountain tracks",
+      "Inspection of 8,000-year-old prehistoric family rock paintings",
+      "Traditional lakeside village lunch in historic Kapıkırı"
+    ],
+    directInquiryQuery: "Hello, I am interested in the Lake Bafa & Latmos 4x4 Jeep Safari tour from Didim.",
+    localOperators: [
+      {
+        name: "Didim Jeep Safari & Off-Road Adventures",
+        type: "Licensed Safari Operator",
+        location: "Altınkum Beach Zone",
+        website: "https://www.google.com/maps/search/?api=1&query=Didim+Jeep+Safari+Tour",
+        badge: "Top Adventure"
+      },
+      {
+        name: "Kapıkırı Lake Bafa Eco-Tours",
+        type: "Eco-Tourism & Hiking Guide",
+        location: "Lake Bafa Natural Park",
+        website: "https://www.google.com/maps/search/?api=1&query=Bafa+Golu+Kapikiri+Koyu+Didim",
+        badge: "Eco Guide"
+      }
+    ]
+  }
+];
+
+export const HOTELS_DATA: HotelItem[] = [
+  {
+    id: "anda-barut-collection",
+    name: "Anda Barut Collection Didim",
+    badge: "Brand New Ultra Luxury Flagship",
+    category: "Ultra Luxury",
+    stars: 5,
+    rating: "★ 4.9 / 5.0",
+    reviewsCount: "Top Luxury Resort in Türkiye",
+    location: "Delice Peninsula, Didim, Aydın",
+    tagline: "Didim's newly opened ultra-luxury sanctuary with private sandy bays & Michelin-level dining",
+    description: "Redefining luxury in the Aegean, Anda Barut Collection sits on its own private 150-acre peninsula surrounded by crystalline turquoise waters. Featuring 14 world-class international à la carte restaurants, bespoke family and adult-only zones, championship wellness spa, and helicopter transfer services.",
+    highlights: [
+      "Private natural sandy beaches and secluded crystal bays",
+      "14 gourmet à la carte restaurants curated by Michelin-star culinary consultants",
+      "Distinct zones for Community, Family, and Adults-Only luxury",
+      "World-class Spa & Wellness Center with indoor/outdoor Thalasso pools"
+    ],
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80"
+    ],
+    priceRange: "€€€€",
+    websiteUrl: "https://barutanda.com/en",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Anda+Barut+Collection+Didim",
+    features: ["Private Sandy Bays", "14 Gourmet Restaurants", "Helipad & VIP Transfers", "Adults-Only & Family Zones", "Luxury Spa & Thalasso"]
+  },
+  {
+    id: "akra-didim-resort",
+    name: "Akra Didim Resort & Spa",
+    badge: "Brand New Aegean Lifestyle Resort",
+    category: "Ultra Luxury",
+    stars: 5,
+    rating: "★ 4.9 / 5.0",
+    reviewsCount: "Premium Lifestyle Hotel",
+    location: "Manastır Bay Coast, Didim",
+    tagline: "Modern Aegean luxury lifestyle & wellness sanctuary overlooking crystal waters",
+    description: "The premier addition to Didim's luxury hospitality scene, Akra Didim combines minimalist Mediterranean architecture with unmatched wellness amenities. Enjoy sunset infinity pools, private beach pavilions, signature cocktails, and bespoke Aegean yacht charters.",
+    highlights: [
+      "Private Blue Flag beach club with luxury overwater cabanas",
+      "Multi-tiered infinity pools overlooking Aegean sunsets",
+      "Holistic wellness spa with Turkish Hammam and bio-sauna",
+      "Signature Mediterranean fusion dining by the water"
+    ],
+    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=80"
+    ],
+    priceRange: "€€€€",
+    websiteUrl: "https://www.akrahotels.com",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Akra+Hotels+Didim",
+    features: ["Private Beach Club", "Infinity Sunset Pools", "Holistic Wellness Spa", "Fine Dining Fusion", "Yacht Charter Concierge"]
+  },
+  {
+    id: "d-marin-didim-yacht-club-hotel",
+    name: "D-Marin Didim Yacht Club & The Blue Point",
+    badge: "Superyacht Marina Boutique Resort",
+    category: "Marina & Boutique",
+    stars: 5,
+    rating: "★ 4.8 / 5.0",
+    reviewsCount: "980+ TripAdvisor Reviews",
+    location: "D-Marin Marina Promenade, Didim",
+    tagline: "Exclusive yachting lifestyle hotel with private beach club on the Aegean",
+    description: "Located within the 5-gold-anchor D-Marin complex, offering sophisticated boutique accommodations, direct access to luxury yacht berths, The Blue Point private beach club, helicopter pad, and gourmet seafood dining.",
+    highlights: [
+      "Direct boardwalk access to 580-berth luxury superyacht marina",
+      "Exclusive The Blue Point private beach club with plush sunbeds",
+      "World-class tennis academy, fitness club & spa center",
+      "Fine dining and sunset cocktail lounges on the marina piers"
+    ],
+    image: "/images/d-marin-didim-marina.jpg",
+    galleryImages: [
+      "/images/d-marin-didim-marina.jpg",
+      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80"
+    ],
+    priceRange: "€€€",
+    websiteUrl: "https://www.d-marin.com/en/marinas/didim/",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=D-Marin+Didim+Yacht+Club+Hotel",
+    features: ["Superyacht Marina Access", "The Blue Point Beach Club", "Helipad & Tennis Club", "Fine Dining Marina Bars", "Boutique Luxury Suites"]
+  },
+  {
+    id: "aquasis-deluxe-resort-spa",
+    name: "Aquasis De Luxe Resort & Spa",
+    badge: "5-Star Beachfront & Aquapark Resort",
+    category: "Family Resort",
+    stars: 5,
+    rating: "★ 4.7 / 5.0",
+    reviewsCount: "3,400+ Family Reviews",
+    location: "Manastır Bay, Didim",
+    tagline: "Expansive 5-star seaside resort with mega aquapark & private sunbathing pier",
+    description: "One of Didim's largest and most complete 5-star all-inclusive resorts, featuring an expansive private beach, gigantic outdoor pool complex, lake swim-up villas, full-scale waterpark with thrilling slides, and 6 à la carte dining restaurants.",
+    highlights: [
+      "Private 200m sandy beach with large sunbathing pier",
+      "Giant Aquapark with 9 water slides for children and adults",
+      "Lake Swim-Up Villas with direct access to crystalline pool water",
+      "Nightly entertainment amphitheater and comprehensive kids club"
+    ],
+    image: "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80"
+    ],
+    priceRange: "€€€",
+    websiteUrl: "https://www.aquasis.com",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Aquasis+De+Luxe+Resort+Spa+Didim",
+    features: ["Private Pier & Sandy Beach", "Mega Aquapark", "Swim-Up Lake Villas", "6 À La Carte Restaurants", "Ultra All-Inclusive"]
+  },
+  {
+    id: "venosa-beach-resort-spa",
+    name: "Venosa Beach Resort & Spa",
+    badge: "5-Star Blue Flag Private Cove",
+    category: "Beachfront",
+    stars: 5,
+    rating: "★ 4.7 / 5.0",
+    reviewsCount: "2,100+ Reviews",
+    location: "Yeşilkent Bay, Altınkum, Didim",
+    tagline: "Private Blue Flag cove with panoramic views over the Aegean archipelago",
+    description: "Nestled in a private natural bay in Yeşilkent, just 5 minutes from Altınkum. Offers ultra-calm shallow swimming, Blue Flag certified clear sea, tranquil Thalasso spa therapies, and sea-view family suites.",
+    highlights: [
+      "Private sheltered Blue Flag beach cove with ultra-calm water",
+      "Extensive Thalasso sea-water therapy pools and wellness spa",
+      "PADI dive center departures and motorized water sports",
+      "5 themed restaurants (Seafood, Ottoman, Italian, Mexican)"
+    ],
+    image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80"
+    ],
+    priceRange: "€€€",
+    websiteUrl: "https://www.venosa.com.tr",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Venosa+Beach+Resort+Spa+Didim",
+    features: ["Blue Flag Private Bay", "Thalasso Spa Center", "5 Themed Restaurants", "Water Sports Hub", "Ultra All-Inclusive"]
+  },
+  {
+    id: "duja-didim-resort",
+    name: "Duja Didim Resort",
+    badge: "5-Star Sunset Beachfront Haven",
+    category: "Beachfront",
+    stars: 5,
+    rating: "★ 4.6 / 5.0",
+    reviewsCount: "1,850+ Reviews",
+    location: "Mersindere Coastal Headland, Didim",
+    tagline: "Elegant seaside resort framed by green pine hills and crystal Aegean sea",
+    description: "A stylish 5-star haven set where green pine hills meet the azure Aegean Sea. Renowned for its private sun deck extending over the water, international gourmet buffets, vibrant animation, and breathtaking sunset panoramas.",
+    highlights: [
+      "Private sun deck pier with comfortable lounge cabanas",
+      "Panoramic sea views from all main restaurants and bars",
+      "Heated indoor & outdoor pools with splash park for kids",
+      "Evening live music performances and beach sunset parties"
+    ],
+    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
+    galleryImages: [
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=80"
+    ],
+    priceRange: "€€€",
+    websiteUrl: "https://dujadidim.com",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Duja+Didim+Resort",
+    features: ["Private Overwater Sun Pier", "Panoramic Sunset Views", "Heated Pools & Kids Club", "Gourmet Dining Stations", "All Inclusive 24h"]
   }
 ];
 

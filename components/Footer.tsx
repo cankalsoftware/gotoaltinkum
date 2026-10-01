@@ -79,6 +79,7 @@ export default function Footer() {
               <li><a href="#history" className="hover:text-white transition-colors">Ancient Miletus Theater</a></li>
               <li><a href="#history" className="hover:text-white transition-colors">Priene Acropolis</a></li>
               <li><a href="#day-trips" className="hover:text-white transition-colors">Daily 5-Bay Boat Trips</a></li>
+              <li><a href="#hotels" className="text-amber-300 font-semibold hover:text-white transition-colors">Anda Barut & Akra Hotels</a></li>
               <li><a href="#day-trips" className="hover:text-white transition-colors">Lake Bafa & Latmos</a></li>
             </ul>
           </div>

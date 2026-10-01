@@ -23,8 +23,9 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
   const navLinks = [
     { label: 'Beaches', href: '#beaches' },
     { label: 'Apollo & History', href: '#history' },
-    { label: 'Local News & Events', href: '#news-events' },
+    { label: 'News & Events', href: '#news-events' },
     { label: 'Aegean Dining', href: '#dining' },
+    { label: 'Hotels & Resorts', href: '#hotels' },
     { label: 'Day Trips', href: '#day-trips' },
     { label: 'Travel Guide', href: '#travel-guide' },
     { label: 'FAQ', href: '#faq' },

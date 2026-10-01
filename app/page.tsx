@@ -7,6 +7,7 @@ import HistorySection from '@/components/HistorySection';
 import NewsAndEvents from '@/components/NewsAndEvents';
 import DiningAndNightlife from '@/components/DiningAndNightlife';
 import DayTripsAndActivities from '@/components/DayTripsAndActivities';
+import HotelsGuide from '@/components/HotelsGuide';
 import TravelGuideAndTransport from '@/components/TravelGuideAndTransport';
 import AdvertisePortal from '@/components/AdvertisePortal';
 import FaqSection from '@/components/FaqSection';
@@ -24,6 +25,7 @@ export default function HomePage() {
         <HistorySection />
         <NewsAndEvents />
         <DiningAndNightlife />
+        <HotelsGuide />
         <DayTripsAndActivities />
         <TravelGuideAndTransport />
         <AdvertisePortal />
