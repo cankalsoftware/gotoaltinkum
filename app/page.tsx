@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import LiveStatusPulse from '@/components/LiveStatusPulse';
 import AeoDirectAnswers from '@/components/AeoDirectAnswers';
 import BeachExplorer from '@/components/BeachExplorer';
 import HistorySection from '@/components/HistorySection';
@@ -20,6 +21,7 @@ export default function HomePage() {
       <Navbar />
       <main className="flex-grow">
         <Hero />
+        <LiveStatusPulse />
         <AeoDirectAnswers />
         <BeachExplorer />
         <HistorySection />

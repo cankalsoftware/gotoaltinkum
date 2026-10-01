@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Sun, Waves, MapPin, Sparkles, Menu, X, Mail, Phone, Calendar, Compass, Search } from 'lucide-react';
+import { Sun, Waves, MapPin, Sparkles, Menu, X, Mail, Phone, Calendar, Compass, Search, TrendingUp, ExternalLink } from 'lucide-react';
+import { trackOutboundClick } from '@/lib/analytics';
 
 interface NavbarProps {
   onOpenAdvertiseModal?: () => void;
@@ -11,12 +12,46 @@ interface NavbarProps {
 export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [liveStats, setLiveStats] = useState({
+    tempC: 28,
+    tempF: 82,
+    seaTempC: 25,
+    gbp: 64.96,
+    eur: 55.52,
+    usd: 49.02,
+    isLive: false,
+  });
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
     };
     window.addEventListener('scroll', handleScroll);
+
+    // Fetch live weather & currency rates
+    const fetchLiveStats = async () => {
+      try {
+        const res = await fetch('/api/live-stats');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.weather && data.exchangeRates) {
+            setLiveStats({
+              tempC: data.weather.tempC,
+              tempF: data.weather.tempF,
+              seaTempC: data.weather.seaTempC,
+              gbp: data.exchangeRates.gbp,
+              eur: data.exchangeRates.eur,
+              usd: data.exchangeRates.usd,
+              isLive: true,
+            });
+          }
+        }
+      } catch (e) {
+        console.warn('Live stats fetch error:', e);
+      }
+    };
+
+    fetchLiveStats();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -34,24 +69,69 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
   return (
     <>
       {/* Top Ticker Bar */}
-      <div className="bg-gradient-to-r from-sky-900 via-cyan-900 to-sky-950 text-white text-xs sm:text-sm py-2 px-4 border-b border-sky-800/40 relative z-50">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center space-x-4">
-            <span className="flex items-center gap-1.5 text-amber-300 font-medium">
-              <Sun className="w-4 h-4 text-amber-400 animate-spin" style={{ animationDuration: '20s' }} />
-              <span>Didim Live: 28°C / 82°F</span>
-            </span>
-            <span className="hidden md:inline-flex items-center gap-1.5 text-sky-200">
+      <div className="bg-gradient-to-r from-sky-950 via-slate-900 to-sky-950 text-white text-xs py-2 px-3 sm:px-4 border-b border-sky-800/40 relative z-50">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-2 gap-x-3">
+          
+          {/* Weather & Live Status */}
+          <div className="flex items-center flex-wrap gap-2.5 sm:gap-4">
+            <a
+              href="#live-pulse"
+              className="flex items-center gap-1.5 text-emerald-400 font-bold bg-emerald-950/80 hover:bg-emerald-900/90 px-2 py-0.5 rounded-full border border-emerald-500/40 text-[11px] transition-all hover:scale-105"
+              title="Click to view full Live Weather, Exchange Radar & AI Telemetry Feed"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>LIVE PULSE</span>
+            </a>
+
+            <a
+              href="#live-pulse"
+              className="flex items-center gap-1.5 text-amber-300 hover:text-amber-200 font-semibold transition-colors"
+              title="View live Didim weather and sea conditions"
+            >
+              <Sun className="w-3.5 h-3.5 text-amber-400 animate-spin" style={{ animationDuration: '25s' }} />
+              <span>Didim: {liveStats.tempC}°C / {liveStats.tempF}°F</span>
+            </a>
+
+            <a
+              href="#live-pulse"
+              className="hidden sm:inline-flex items-center gap-1 text-sky-300 hover:text-sky-200 font-medium transition-colors"
+              title="View Aegean sea temperature"
+            >
               <Waves className="w-3.5 h-3.5 text-cyan-300" />
-              <span>Aegean Sea: 25°C</span>
-            </span>
-            <span className="hidden lg:inline-flex items-center gap-1 text-emerald-300 font-medium">
-              <Sparkles className="w-3 h-3" />
-              <span>300+ Days of Sunshine</span>
-            </span>
+              <span>Sea: {liveStats.seaTempC}°C</span>
+            </a>
+
+            {/* Exchange Rates Pill */}
+            <div className="flex items-center gap-1.5 bg-white/10 px-2.5 py-0.5 rounded-full border border-white/15 text-[11px]">
+              <a
+                href="#live-pulse"
+                className="text-amber-300 font-bold flex items-center gap-1 hover:text-amber-200 transition-colors"
+                title="View live FX currency breakdown"
+              >
+                <TrendingUp className="w-3 h-3 text-amber-400" />
+                <span>FX:</span>
+              </a>
+              <span className="text-white font-semibold">£1=₺{liveStats.gbp}</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-semibold">€1=₺{liveStats.eur}</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-semibold">$1=₺{liveStats.usd}</span>
+
+              <a
+                href="https://www.xe.com/currencyconverter/convert/?Amount=1&From=GBP&To=TRY"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackOutboundClick('currency_xe', 'XE Live Rates Ticker', 'https://www.xe.com')}
+                className="text-[10px] font-bold text-cyan-300 hover:text-white underline decoration-cyan-400/60 ml-1 flex items-center gap-0.5"
+                title="View live currency exchange rates on XE.com"
+              >
+                <span>XE.com ↗</span>
+              </a>
+            </div>
           </div>
 
-          <div className="flex items-center space-x-2 sm:space-x-4 text-xs">
+          {/* Quick Contact Links */}
+          <div className="flex items-center space-x-2 sm:space-x-3 text-xs">
             <a
               href="https://wa.me/905374909095?text=Hello%20GoToAltinkum,%20I%20would%20like%20to%20inquire%20about%20Didim%20and%20Altinkum."
               target="_blank"
@@ -59,18 +139,17 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
               className="flex items-center gap-1 text-emerald-300 hover:text-white font-semibold transition-colors bg-emerald-500/20 hover:bg-emerald-500/30 px-2.5 py-0.5 rounded-full border border-emerald-400/30"
             >
               <Phone className="w-3 h-3 text-emerald-400" />
-              <span>WhatsApp: 0537 490 90 95</span>
+              <span className="hidden sm:inline">WhatsApp:</span>
+              <span>0537 490 90 95</span>
             </a>
-            <span className="text-sky-400 hidden sm:inline">|</span>
+            
             <a
               href="mailto:info@gotoaltinkum.com?subject=Advertising Inquiry for GoToAltinkum.com"
-              className="hidden sm:flex items-center gap-1 text-amber-300 hover:text-white font-semibold transition-colors bg-amber-500/20 hover:bg-amber-500/30 px-2.5 py-0.5 rounded-full border border-amber-400/30"
+              className="hidden md:flex items-center gap-1 text-amber-300 hover:text-white font-semibold transition-colors bg-amber-500/20 hover:bg-amber-500/30 px-2.5 py-0.5 rounded-full border border-amber-400/30"
             >
               <Mail className="w-3 h-3" />
               <span>info@gotoaltinkum.com</span>
             </a>
-            <span className="text-sky-400 hidden md:inline">|</span>
-            <span className="hidden md:inline text-sky-200">Aydın, Türkiye 🇹🇷</span>
           </div>
         </div>
       </div>

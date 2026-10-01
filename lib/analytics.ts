@@ -25,7 +25,7 @@ export function trackEvent(
 }
 
 export function trackOutboundClick(
-  category: 'day_trip' | 'hotel' | 'restaurant' | 'beach_maps' | 'whatsapp' | 'partner',
+  category: 'day_trip' | 'hotel' | 'restaurant' | 'beach_maps' | 'whatsapp' | 'partner' | 'currency_xe' | string,
   label: string,
   targetUrl: string
 ) {
