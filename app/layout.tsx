@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import './globals.css';
 import StructuredData from '@/components/StructuredData';
+import CookieConsentBanner from '@/components/CookieConsentBanner';
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-YJXVC4Q4X8';
 
@@ -130,6 +131,7 @@ export default function RootLayout({
         </Script>
 
         {children}
+        <CookieConsentBanner />
       </body>
     </html>
   );

@@ -68,16 +68,16 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: 'Visitor Hub', shortLabel: 'Visitor Hub', href: '#visitor-hub' },
-    { label: 'Beaches', shortLabel: 'Beaches', href: '#beaches' },
-    { label: 'Apollo & History', shortLabel: 'History', href: '#history' },
-    { label: 'News & Events', shortLabel: 'News', href: '#news-events' },
-    { label: 'Aegean Dining', shortLabel: 'Dining', href: '#dining' },
-    { label: 'Hotels & Resorts', shortLabel: 'Hotels', href: '#hotels' },
-    { label: 'Day Trips', shortLabel: 'Day Trips', href: '#day-trips' },
-    { label: 'Flights', shortLabel: 'Flights', href: '#flights' },
-    { label: 'Travel Guide', shortLabel: 'Guide', href: '#travel-guide' },
-    { label: 'FAQ', shortLabel: 'FAQ', href: '#faq' },
+    { label: 'Visitor Hub', shortLabel: 'Visitor Hub', href: '/#visitor-hub' },
+    { label: 'Beaches', shortLabel: 'Beaches', href: '/#beaches' },
+    { label: 'Apollo & History', shortLabel: 'History', href: '/#history' },
+    { label: 'News & Events', shortLabel: 'News', href: '/#news-events' },
+    { label: 'Aegean Dining', shortLabel: 'Dining', href: '/#dining' },
+    { label: 'Hotels & Resorts', shortLabel: 'Hotels', href: '/#hotels' },
+    { label: 'Day Trips', shortLabel: 'Day Trips', href: '/#day-trips' },
+    { label: 'Flights', shortLabel: 'Flights', href: '/#flights' },
+    { label: 'Travel Guide', shortLabel: 'Guide', href: '/#travel-guide' },
+    { label: 'FAQ', shortLabel: 'FAQ', href: '/#faq' },
   ];
 
   return (
