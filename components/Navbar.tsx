@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Sun, Waves, Sparkles, Menu, X, Mail, Phone, TrendingUp, ExternalLink } from 'lucide-react';
+import { Sun, Waves, Sparkles, Menu, X, Mail, Phone, TrendingUp, ExternalLink, ChevronDown } from 'lucide-react';
 import { trackOutboundClick } from '@/lib/analytics';
 
 interface NavbarProps {
@@ -12,6 +12,9 @@ interface NavbarProps {
 export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
+  const moreDropdownRef = useRef<HTMLDivElement>(null);
+
   const [liveStats, setLiveStats] = useState({
     tempC: 28,
     tempF: 82,
@@ -27,6 +30,14 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
       setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Close dropdown on outside click
+    const handleClickOutside = (event: MouseEvent) => {
+      if (moreDropdownRef.current && !moreDropdownRef.current.contains(event.target as Node)) {
+        setMoreDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
 
     // Fetch live weather & currency rates
     const fetchLiveStats = async () => {
@@ -52,7 +63,10 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
     };
 
     fetchLiveStats();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   // Lock body scroll when mobile menu is open to prevent background scrolling
@@ -67,7 +81,8 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
     };
   }, [mobileMenuOpen]);
 
-  const navLinks = [
+  // All 10 navigation links
+  const allNavLinks = [
     { label: 'Visitor Hub', shortLabel: 'Visitor Hub', href: '/#visitor-hub' },
     { label: 'Beaches', shortLabel: 'Beaches', href: '/#beaches' },
     { label: 'Apollo & History', shortLabel: 'History', href: '/#history' },
@@ -80,6 +95,25 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
     { label: 'FAQ', shortLabel: 'FAQ', href: '/#faq' },
   ];
 
+  // Core links always displayed directly on compact laptops (1024px to 1279px)
+  const compactPrimaryLinks = [
+    { label: 'Beaches', href: '/#beaches' },
+    { label: 'History', href: '/#history' },
+    { label: 'Dining', href: '/#dining' },
+    { label: 'Hotels', href: '/#hotels' },
+    { label: 'Flights', href: '/#flights' },
+  ];
+
+  // Secondary links grouped in "More ▾" on compact laptops (1024px to 1279px)
+  const compactSecondaryLinks = [
+    { label: 'Visitor Hub', href: '/#visitor-hub' },
+    { label: 'Day Trips', href: '/#day-trips' },
+    { label: 'News & Events', href: '/#news-events' },
+    { label: 'Travel Guide & Dolmuş', href: '/#travel-guide' },
+    { label: 'Traveler FAQ', href: '/#faq' },
+    { label: 'Legal Center', href: '/legal' },
+  ];
+
   return (
     <>
       {/* Top Ticker Bar */}
@@ -89,7 +123,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
           {/* Weather & Live Status */}
           <div className="flex items-center flex-wrap gap-1.5 sm:gap-3">
             <a
-              href="#live-pulse"
+              href="/#live-pulse"
               className="flex items-center gap-1 text-emerald-400 font-bold bg-emerald-950/80 hover:bg-emerald-900/90 px-2 py-0.5 rounded-full border border-emerald-500/40 text-[10px] sm:text-[11px] transition-all hover:scale-105 shrink-0 whitespace-nowrap"
               title="Click to view full Live Weather, Exchange Radar & AI Telemetry Feed"
             >
@@ -98,7 +132,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
             </a>
 
             <a
-              href="#live-pulse"
+              href="/#live-pulse"
               className="flex items-center gap-1 text-amber-300 hover:text-amber-200 font-semibold text-[11px] sm:text-xs transition-colors shrink-0 whitespace-nowrap"
               title="View live Didim weather and sea conditions"
             >
@@ -107,7 +141,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
             </a>
 
             <a
-              href="#live-pulse"
+              href="/#live-pulse"
               className="hidden md:inline-flex items-center gap-1 text-sky-300 hover:text-sky-200 font-medium text-xs transition-colors shrink-0 whitespace-nowrap"
               title="View Aegean sea temperature"
             >
@@ -118,7 +152,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
             {/* Exchange Rates Pill */}
             <div className="flex items-center flex-wrap gap-1 bg-white/10 px-2 sm:px-2.5 py-0.5 rounded-full border border-white/15 text-[10px] sm:text-[11px] shrink-0 whitespace-nowrap">
               <a
-                href="#live-pulse"
+                href="/#live-pulse"
                 className="text-amber-300 font-bold flex items-center gap-0.5 hover:text-amber-200 transition-colors"
                 title="View live FX currency breakdown"
               >
@@ -176,52 +210,103 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
             : 'bg-white/90 backdrop-blur-sm py-2.5 sm:py-3.5 border-b border-slate-200/60'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 flex items-center justify-between gap-2 sm:gap-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 flex items-center justify-between gap-3">
           
-          {/* Brand Logo - 100% Non-Truncating & Adaptable on All Screen Sizes */}
-          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group shrink-0 whitespace-nowrap no-underline">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-sky-500 via-cyan-400 to-amber-400 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform shrink-0">
+          {/* Brand Logo - Compact, No Side Badge, Main Areas Listed Below */}
+          <Link 
+            href="/" 
+            className="flex items-center gap-2 sm:gap-2.5 group shrink-0 whitespace-nowrap no-underline mr-3 sm:mr-5 xl:mr-8"
+          >
+            <div className="w-8 h-8 sm:w-9 sm:h-9 xl:w-10 xl:h-10 rounded-xl bg-gradient-to-tr from-sky-500 via-cyan-400 to-amber-400 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform shrink-0">
               <Waves className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
             <div className="shrink-0 flex flex-col justify-center">
-              <div className="flex items-center gap-1 sm:gap-1.5 whitespace-nowrap">
-                <span className="text-base sm:text-xl xl:text-2xl font-black tracking-tight text-slate-900 whitespace-nowrap">
+              <div className="flex items-center whitespace-nowrap">
+                <span className="text-base sm:text-lg xl:text-2xl font-black tracking-tight text-slate-900 whitespace-nowrap">
                   GoTo<span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-cyan-600 to-amber-500">Altinkum</span>
                 </span>
-                <span className="bg-amber-100 text-amber-800 text-[9px] sm:text-[10px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider border border-amber-200 shrink-0 whitespace-nowrap">
-                  Didim
-                </span>
               </div>
-              <p className="text-[8px] sm:text-[9px] xl:text-[10px] text-slate-500 tracking-wider uppercase font-semibold whitespace-nowrap">
-                Official Visitor Guide & Portal
+              <p className="text-[8px] sm:text-[9px] xl:text-[10px] text-slate-500 tracking-wide font-semibold whitespace-nowrap flex items-center gap-1">
+                <span>Didim</span>
+                <span className="text-amber-500">•</span>
+                <span>Altınkum</span>
+                <span className="text-amber-500">•</span>
+                <span>Akbük</span>
+                <span className="text-amber-500">•</span>
+                <span>Mavişehir</span>
               </p>
             </div>
           </Link>
 
-          {/* Desktop Navigation Links - Compact, High-Density, Non-Scrolling */}
-          <nav className="hidden lg:flex items-center justify-center space-x-0.5 xl:space-x-1 flex-1 min-w-0 px-1">
-            {navLinks.map((link) => (
-              <a
+          {/* 1. Large Desktop Screens (1280px+): Full 10 Menu Items with Right Alignment */}
+          <nav className="hidden xl:flex items-center justify-end space-x-1 flex-1 px-1">
+            {allNavLinks.map((link) => (
+              <Link
                 key={link.label}
                 href={link.href}
-                className="text-[11px] xl:text-xs 2xl:text-[13px] font-bold text-slate-700 hover:text-sky-600 px-1.5 xl:px-2.5 py-1.5 rounded-lg hover:bg-sky-50 transition-colors whitespace-nowrap shrink-0"
+                className="text-xs 2xl:text-[13px] font-bold text-slate-700 hover:text-sky-600 px-2 2xl:px-2.5 py-1.5 rounded-lg hover:bg-sky-50 transition-colors whitespace-nowrap shrink-0"
               >
-                <span className="hidden xl:inline">{link.label}</span>
-                <span className="xl:hidden">{link.shortLabel}</span>
-              </a>
+                <span>{link.label}</span>
+              </Link>
             ))}
           </nav>
 
+          {/* 2. Compact Laptop / Tablet Landscape Screens (1024px to 1279px): 5 Primary Links + "More ▾" Dropdown */}
+          <nav className="hidden lg:flex xl:hidden items-center justify-end space-x-1 flex-1 px-1">
+            {compactPrimaryLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="text-xs font-bold text-slate-700 hover:text-sky-600 px-2 py-1.5 rounded-lg hover:bg-sky-50 transition-colors whitespace-nowrap shrink-0"
+              >
+                <span>{link.label}</span>
+              </Link>
+            ))}
+
+            {/* "More ▾" Interactive Dropdown */}
+            <div className="relative shrink-0" ref={moreDropdownRef}>
+              <button
+                onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
+                className={`text-xs font-bold px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1 whitespace-nowrap cursor-pointer ${
+                  moreDropdownOpen
+                    ? 'bg-sky-100 text-sky-700'
+                    : 'text-slate-700 hover:text-sky-600 hover:bg-sky-50'
+                }`}
+                aria-expanded={moreDropdownOpen}
+              >
+                <span>More</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${moreDropdownOpen ? 'rotate-180 text-sky-600' : 'text-slate-400'}`} />
+              </button>
+
+              {moreDropdownOpen && (
+                <div className="absolute right-0 top-full mt-1.5 w-52 bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-200 py-2 z-50 animate-fadeIn divide-y divide-slate-100">
+                  <div className="py-1">
+                    {compactSecondaryLinks.map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => setMoreDropdownOpen(false)}
+                        className="block px-3.5 py-2 text-xs font-semibold text-slate-700 hover:text-sky-600 hover:bg-sky-50 transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </nav>
+
           {/* Action CTAs */}
-          <div className="hidden lg:flex items-center shrink-0">
-            <a
-              href="#advertise"
-              className="inline-flex items-center gap-1.5 px-2.5 xl:px-3.5 py-1.5 xl:py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-sm shadow-amber-500/30 hover:shadow-md transition-all hover:scale-[1.02] whitespace-nowrap shrink-0"
+          <div className="hidden lg:flex items-center shrink-0 ml-1">
+            <Link
+              href="/#advertise"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 xl:py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-sm shadow-amber-500/30 hover:shadow-md transition-all hover:scale-[1.02] whitespace-nowrap shrink-0"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-200 shrink-0" />
               <span className="hidden xl:inline">Advertise Business</span>
               <span className="xl:hidden">Advertise</span>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Hamburger Button (Accessible 44x44px touch target) */}
@@ -241,8 +326,8 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white/98 backdrop-blur-xl border-b border-slate-200 px-4 pt-3 pb-6 shadow-2xl animate-fadeIn max-h-[calc(100vh-110px)] overflow-y-auto">
             <div className="space-y-1">
-              {navLinks.map((link) => (
-                <a
+              {allNavLinks.map((link) => (
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
@@ -250,7 +335,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
                 >
                   <span>{link.label}</span>
                   <span className="text-slate-400 text-xs">➔</span>
-                </a>
+                </Link>
               ))}
             </div>
 
