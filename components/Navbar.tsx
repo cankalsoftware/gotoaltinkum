@@ -68,16 +68,16 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: 'Visitor Hub', href: '#visitor-hub' },
-    { label: 'Beaches', href: '#beaches' },
-    { label: 'Apollo & History', href: '#history' },
-    { label: 'News & Events', href: '#news-events' },
-    { label: 'Aegean Dining', href: '#dining' },
-    { label: 'Hotels & Resorts', href: '#hotels' },
-    { label: 'Day Trips', href: '#day-trips' },
-    { label: 'Flights', href: '#flights' },
-    { label: 'Travel Guide', href: '#travel-guide' },
-    { label: 'FAQ', href: '#faq' },
+    { label: 'Visitor Hub', shortLabel: 'Visitor Hub', href: '#visitor-hub' },
+    { label: 'Beaches', shortLabel: 'Beaches', href: '#beaches' },
+    { label: 'Apollo & History', shortLabel: 'History', href: '#history' },
+    { label: 'News & Events', shortLabel: 'News', href: '#news-events' },
+    { label: 'Aegean Dining', shortLabel: 'Dining', href: '#dining' },
+    { label: 'Hotels & Resorts', shortLabel: 'Hotels', href: '#hotels' },
+    { label: 'Day Trips', shortLabel: 'Day Trips', href: '#day-trips' },
+    { label: 'Flights', shortLabel: 'Flights', href: '#flights' },
+    { label: 'Travel Guide', shortLabel: 'Guide', href: '#travel-guide' },
+    { label: 'FAQ', shortLabel: 'FAQ', href: '#faq' },
   ];
 
   return (
@@ -90,7 +90,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
           <div className="flex items-center flex-wrap gap-1.5 sm:gap-3">
             <a
               href="#live-pulse"
-              className="flex items-center gap-1 text-emerald-400 font-bold bg-emerald-950/80 hover:bg-emerald-900/90 px-2 py-0.5 rounded-full border border-emerald-500/40 text-[10px] sm:text-[11px] transition-all hover:scale-105 shrink-0"
+              className="flex items-center gap-1 text-emerald-400 font-bold bg-emerald-950/80 hover:bg-emerald-900/90 px-2 py-0.5 rounded-full border border-emerald-500/40 text-[10px] sm:text-[11px] transition-all hover:scale-105 shrink-0 whitespace-nowrap"
               title="Click to view full Live Weather, Exchange Radar & AI Telemetry Feed"
             >
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -99,7 +99,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
 
             <a
               href="#live-pulse"
-              className="flex items-center gap-1 text-amber-300 hover:text-amber-200 font-semibold text-[11px] sm:text-xs transition-colors shrink-0"
+              className="flex items-center gap-1 text-amber-300 hover:text-amber-200 font-semibold text-[11px] sm:text-xs transition-colors shrink-0 whitespace-nowrap"
               title="View live Didim weather and sea conditions"
             >
               <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 animate-spin" style={{ animationDuration: '25s' }} />
@@ -108,7 +108,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
 
             <a
               href="#live-pulse"
-              className="hidden md:inline-flex items-center gap-1 text-sky-300 hover:text-sky-200 font-medium text-xs transition-colors shrink-0"
+              className="hidden md:inline-flex items-center gap-1 text-sky-300 hover:text-sky-200 font-medium text-xs transition-colors shrink-0 whitespace-nowrap"
               title="View Aegean sea temperature"
             >
               <Waves className="w-3.5 h-3.5 text-cyan-300" />
@@ -116,7 +116,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
             </a>
 
             {/* Exchange Rates Pill */}
-            <div className="flex items-center flex-wrap gap-1 bg-white/10 px-2 sm:px-2.5 py-0.5 rounded-full border border-white/15 text-[10px] sm:text-[11px]">
+            <div className="flex items-center flex-wrap gap-1 bg-white/10 px-2 sm:px-2.5 py-0.5 rounded-full border border-white/15 text-[10px] sm:text-[11px] shrink-0 whitespace-nowrap">
               <a
                 href="#live-pulse"
                 className="text-amber-300 font-bold flex items-center gap-0.5 hover:text-amber-200 transition-colors"
@@ -145,12 +145,12 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
           </div>
 
           {/* Quick Contact Links */}
-          <div className="flex items-center space-x-1.5 sm:space-x-3 text-xs">
+          <div className="flex items-center space-x-1.5 sm:space-x-3 text-xs shrink-0 whitespace-nowrap">
             <a
               href="https://wa.me/905374909095?text=Hello%20GoToAltinkum,%20I%20would%20like%20to%20inquire%20about%20Didim%20and%20Altinkum."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-emerald-300 hover:text-white font-semibold transition-colors bg-emerald-500/20 hover:bg-emerald-500/30 px-2 sm:px-2.5 py-0.5 rounded-full border border-emerald-400/30 text-[10px] sm:text-xs shrink-0"
+              className="flex items-center gap-1 text-emerald-300 hover:text-white font-semibold transition-colors bg-emerald-500/20 hover:bg-emerald-500/30 px-2 sm:px-2.5 py-0.5 rounded-full border border-emerald-400/30 text-[10px] sm:text-xs shrink-0 whitespace-nowrap"
             >
               <Phone className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-emerald-400" />
               <span className="hidden md:inline">WhatsApp:</span>
@@ -159,7 +159,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
             
             <a
               href="mailto:info@gotoaltinkum.com?subject=Advertising Inquiry for GoToAltinkum.com"
-              className="hidden lg:flex items-center gap-1 text-amber-300 hover:text-white font-semibold transition-colors bg-amber-500/20 hover:bg-amber-500/30 px-2.5 py-0.5 rounded-full border border-amber-400/30 text-xs"
+              className="hidden lg:flex items-center gap-1 text-amber-300 hover:text-white font-semibold transition-colors bg-amber-500/20 hover:bg-amber-500/30 px-2.5 py-0.5 rounded-full border border-amber-400/30 text-xs shrink-0 whitespace-nowrap"
             >
               <Mail className="w-3 h-3" />
               <span>info@gotoaltinkum.com</span>
@@ -172,60 +172,63 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           scrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 sm:py-3 border-b border-slate-100'
-            : 'bg-white/85 backdrop-blur-sm py-3 sm:py-4 border-b border-slate-200/50'
+            ? 'bg-white/95 backdrop-blur-md shadow-md py-2 sm:py-2.5 border-b border-slate-100'
+            : 'bg-white/90 backdrop-blur-sm py-2.5 sm:py-3.5 border-b border-slate-200/60'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-sky-500 via-cyan-400 to-amber-400 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform shrink-0">
-              <Waves className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 flex items-center justify-between gap-2 sm:gap-4">
+          
+          {/* Brand Logo - 100% Non-Truncating & Adaptable on All Screen Sizes */}
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group shrink-0 whitespace-nowrap no-underline">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-sky-500 via-cyan-400 to-amber-400 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform shrink-0">
+              <Waves className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-1 sm:gap-1.5">
-                <span className="text-lg sm:text-2xl font-black tracking-tight text-slate-900 truncate">
+            <div className="shrink-0 flex flex-col justify-center">
+              <div className="flex items-center gap-1 sm:gap-1.5 whitespace-nowrap">
+                <span className="text-base sm:text-xl xl:text-2xl font-black tracking-tight text-slate-900 whitespace-nowrap">
                   GoTo<span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-cyan-600 to-amber-500">Altinkum</span>
                 </span>
-                <span className="bg-amber-100 text-amber-800 text-[9px] sm:text-[10px] font-bold px-1 sm:px-1.5 py-0.5 rounded uppercase tracking-wider border border-amber-200 shrink-0">
+                <span className="bg-amber-100 text-amber-800 text-[9px] sm:text-[10px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider border border-amber-200 shrink-0 whitespace-nowrap">
                   Didim
                 </span>
               </div>
-              <p className="text-[9px] sm:text-[10px] text-slate-500 tracking-wider uppercase font-semibold truncate">
+              <p className="text-[8px] sm:text-[9px] xl:text-[10px] text-slate-500 tracking-wider uppercase font-semibold whitespace-nowrap">
                 Official Visitor Guide & Portal
               </p>
             </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+          {/* Desktop Navigation Links - Compact, High-Density, Non-Scrolling */}
+          <nav className="hidden lg:flex items-center justify-center space-x-0.5 xl:space-x-1 flex-1 min-w-0 px-1">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-xs xl:text-sm font-semibold text-slate-700 hover:text-sky-600 px-2.5 xl:px-3 py-2 rounded-lg hover:bg-sky-50/80 transition-all"
+                className="text-[11px] xl:text-xs 2xl:text-[13px] font-bold text-slate-700 hover:text-sky-600 px-1.5 xl:px-2.5 py-1.5 rounded-lg hover:bg-sky-50 transition-colors whitespace-nowrap shrink-0"
               >
-                {link.label}
+                <span className="hidden xl:inline">{link.label}</span>
+                <span className="xl:hidden">{link.shortLabel}</span>
               </a>
             ))}
           </nav>
 
           {/* Action CTAs */}
-          <div className="hidden sm:flex items-center space-x-3">
+          <div className="hidden lg:flex items-center shrink-0">
             <a
               href="#advertise"
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-sm shadow-amber-500/30 hover:shadow-md transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-1.5 px-2.5 xl:px-3.5 py-1.5 xl:py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-sm shadow-amber-500/30 hover:shadow-md transition-all hover:scale-[1.02] whitespace-nowrap shrink-0"
             >
-              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-200" />
-              <span>Advertise Business</span>
+              <Sparkles className="w-3.5 h-3.5 text-amber-200 shrink-0" />
+              <span className="hidden xl:inline">Advertise Business</span>
+              <span className="xl:hidden">Advertise</span>
             </a>
           </div>
 
           {/* Mobile Hamburger Button (Accessible 44x44px touch target) */}
-          <div className="lg:hidden flex items-center">
+          <div className="lg:hidden flex items-center shrink-0">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 sm:p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-slate-700 hover:bg-slate-100 active:bg-slate-200 focus:outline-none transition-colors"
+              className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-slate-700 hover:bg-slate-100 active:bg-slate-200 focus:outline-none transition-colors shrink-0"
               aria-label="Toggle Navigation Menu"
               aria-expanded={mobileMenuOpen}
             >
