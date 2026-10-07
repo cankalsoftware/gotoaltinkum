@@ -97,6 +97,7 @@ export default function Footer() {
               </li>
               <li><a href="mailto:info@gotoaltinkum.com" className="hover:text-white transition-colors">Partner Media Kit</a></li>
               <li><a href="#news-events" className="hover:text-white transition-colors">Didim VegFest News</a></li>
+              <li><a href="#flights" className="text-sky-300 font-semibold hover:text-white transition-colors">Flights & Airlines (Skyscanner/Jet2)</a></li>
               <li><a href="#travel-guide" className="hover:text-white transition-colors">Airport Transfers (BJV/ADB)</a></li>
               <li><a href="#faq" className="hover:text-white transition-colors">Traveler FAQ</a></li>
             </ul>

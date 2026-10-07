@@ -1320,3 +1320,335 @@ export const PRACTICAL_TRAVEL_TIPS: PracticalTravelTip[] = [
   }
 ];
 
+export interface AirlineCarrier {
+  id: string;
+  name: string;
+  shortName: string;
+  tagline: string;
+  country: string;
+  colorTheme: string;
+  badgeBg: string;
+  badgeText: string;
+  websiteUrl: string;
+  searchUrl: string;
+  airportsServed: ('BJV' | 'ADB')[];
+  popularDepHubs: string[];
+  baggagePolicy: string;
+  keyPerk: string;
+  bestFor: string;
+}
+
+export interface FlightRouteIdea {
+  id: string;
+  originCity: string;
+  originCode: string;
+  originCountry: string;
+  destinationCity: string;
+  destinationAirport: string;
+  destinationCode: 'BJV' | 'ADB';
+  airlineId: string;
+  airlineName: string;
+  flightDuration: string;
+  frequency: string;
+  seasonality: string;
+  priceIdeaLow: string;
+  priceIdeaPeak: string;
+  highlights: string[];
+  skyscannerSearchUrl: string;
+  airlineSearchUrl: string;
+}
+
+export const AIRLINE_CARRIERS_DATA: AirlineCarrier[] = [
+  {
+    id: "easyjet",
+    name: "EasyJet",
+    shortName: "easyJet",
+    tagline: "High-frequency direct low-cost flights from across the UK to Bodrum & Izmir",
+    country: "United Kingdom / Europe",
+    colorTheme: "from-orange-500 to-amber-500",
+    badgeBg: "bg-orange-500/15 text-orange-400 border-orange-500/30",
+    badgeText: "Direct UK & EU Routes",
+    websiteUrl: "https://www.easyjet.com",
+    searchUrl: "https://www.easyjet.com/en/cheap-flights/turkey",
+    airportsServed: ["BJV", "ADB"],
+    popularDepHubs: ["London Gatwick (LGW)", "London Luton (LTN)", "Manchester (MAN)", "Bristol (BRS)", "Liverpool (LPL)", "Edinburgh (EDI)"],
+    baggagePolicy: "Free under-seat cabin bag included. Large cabin bag & 15/23kg checked bags optional.",
+    keyPerk: "Frequent summer departures with flexible schedule combinations into Bodrum and Izmir.",
+    bestFor: "Budget-conscious travelers, flexible schedules, direct flights from London & regional UK"
+  },
+  {
+    id: "jet2",
+    name: "Jet2.com",
+    shortName: "Jet2",
+    tagline: "Award-winning British leisure airline with generous 22kg luggage allowance",
+    country: "United Kingdom",
+    colorTheme: "from-red-600 to-rose-600",
+    badgeBg: "bg-red-500/15 text-red-400 border-red-500/30",
+    badgeText: "22kg Baggage Included Available",
+    websiteUrl: "https://www.jet2.com",
+    searchUrl: "https://www.jet2.com/destinations/turkey",
+    airportsServed: ["BJV", "ADB"],
+    popularDepHubs: ["Manchester (MAN)", "Birmingham (BHX)", "Leeds Bradford (LBA)", "London Stansted (STN)", "Newcastle (NCL)", "Bristol (BRS)", "East Midlands (EMA)", "Glasgow (GLA)", "Edinburgh (EDI)", "Liverpool (LPL)", "Belfast (BFS)"],
+    baggagePolicy: "Generous 10kg hand luggage free + optional 22kg checked baggage.",
+    keyPerk: "UK's #1 holiday airline for customer service, family friendly flight times, and zero credit card fees.",
+    bestFor: "Families, UK Midlands & North travelers, generous luggage allowances"
+  },
+  {
+    id: "tui",
+    name: "TUI Airways",
+    shortName: "TUI",
+    tagline: "The UK's largest holiday flight network with dedicated summer charter routes",
+    country: "United Kingdom / Germany",
+    colorTheme: "from-sky-500 to-blue-600",
+    badgeBg: "bg-sky-500/15 text-sky-400 border-sky-500/30",
+    badgeText: "Charter & Flight-Only",
+    websiteUrl: "https://www.tui.co.uk/flight/",
+    searchUrl: "https://www.tui.co.uk/flight/turkey-flights",
+    airportsServed: ["BJV", "ADB"],
+    popularDepHubs: ["London Gatwick (LGW)", "Manchester (MAN)", "Birmingham (BHX)", "Bristol (BRS)", "Newcastle (NCL)", "Glasgow (GLA)", "Cardiff (CWL)", "East Midlands (EMA)"],
+    baggagePolicy: "10kg cabin bag on flight-only; optional 20kg or 25kg checked bag packages.",
+    keyPerk: "Direct flights to Milas-Bodrum Airport (BJV) matched with trusted British holiday operations.",
+    bestFor: "Package and flight-only holidaymakers, seamless direct summer charters"
+  },
+  {
+    id: "sunexpress",
+    name: "SunExpress",
+    shortName: "SunExpress",
+    tagline: "The Aegean specialist airline — joint venture of Lufthansa & Turkish Airlines",
+    country: "Türkiye & Germany (Lufthansa JV)",
+    colorTheme: "from-amber-500 to-yellow-500",
+    badgeBg: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+    badgeText: "Aegean Hub Specialist",
+    websiteUrl: "https://www.sunexpress.com",
+    searchUrl: "https://www.sunexpress.com/en",
+    airportsServed: ["ADB", "BJV"],
+    popularDepHubs: ["London Luton (LTN)", "London Stansted (STN)", "Manchester (MAN)", "Birmingham (BHX)", "Edinburgh (EDI)", "Frankfurt (FRA)", "Munich (MUC)", "Düsseldorf (DUS)", "Berlin (BER)", "Cologne (CGN)", "Stuttgart (STR)", "Vienna (VIE)", "Zurich (ZRH)"],
+    baggagePolicy: "8kg carry-on standard + 20kg/30kg checked baggage tiers (SunFares).",
+    keyPerk: "Unrivalled high frequency into Izmir (ADB) with year-round direct flights and German engineering backing.",
+    bestFor: "Travelers from Germany/Central Europe, direct Izmir flights, year-round connectivity"
+  },
+  {
+    id: "turkishairlines",
+    name: "Turkish Airlines",
+    shortName: "Turkish Airlines",
+    tagline: "World's most connected national carrier with daily flights & 5-star service",
+    country: "Türkiye (National Flag Carrier)",
+    colorTheme: "from-rose-600 to-red-800",
+    badgeBg: "bg-rose-500/15 text-rose-400 border-rose-500/30",
+    badgeText: "Full-Service & Daily Flights",
+    websiteUrl: "https://www.turkishairlines.com",
+    searchUrl: "https://www.turkishairlines.com/en-gb/flights/",
+    airportsServed: ["ADB", "BJV"],
+    popularDepHubs: ["London Heathrow (LHR)", "London Gatwick (LGW)", "Manchester (MAN)", "Birmingham (BHX)", "Edinburgh (EDI)", "Dublin (DUB)", "Frankfurt (FRA)", "Paris (CDG)", "Worldwide connections"],
+    baggagePolicy: "8kg cabin bag + 23kg to 30kg checked baggage included on most standard international fares.",
+    keyPerk: "Complimentary inflight dining, generous seat comfort, seamless connections via Istanbul (IST) 365 days a year.",
+    bestFor: "Year-round luxury travel, global long-haul connections, premium hospitality"
+  },
+  {
+    id: "condor",
+    name: "Condor",
+    shortName: "Condor",
+    tagline: "Germany's favorite leisure airline flying directly to the Aegean coast",
+    country: "Germany",
+    colorTheme: "from-yellow-400 to-amber-600",
+    badgeBg: "bg-yellow-500/15 text-yellow-400 border-yellow-500/30",
+    badgeText: "German Holiday Specialist",
+    websiteUrl: "https://www.condor.com",
+    searchUrl: "https://www.condor.com/eu/flights/turkey/",
+    airportsServed: ["BJV", "ADB"],
+    popularDepHubs: ["Frankfurt (FRA)", "Munich (MUC)", "Düsseldorf (DUS)", "Hamburg (HAM)", "Leipzig/Halle (LEJ)", "Stuttgart (STR)", "Berlin (BER)"],
+    baggagePolicy: "8kg cabin baggage + 20kg checked bag options in Classic / Best fare categories.",
+    keyPerk: "Distinctive striped aircraft, direct non-stop flights connecting German regions to Bodrum & Izmir.",
+    bestFor: "Holidaymakers from Germany, Austria, Switzerland heading to Didim and the Aegean"
+  }
+];
+
+export const FLIGHT_ROUTES_DATABASE: FlightRouteIdea[] = [
+  {
+    id: "london-bodrum-easyjet",
+    originCity: "London (Gatwick / Luton)",
+    originCode: "LGW / LTN",
+    originCountry: "United Kingdom",
+    destinationCity: "Bodrum (Altınkum 60m)",
+    destinationAirport: "Milas-Bodrum Airport",
+    destinationCode: "BJV",
+    airlineId: "easyjet",
+    airlineName: "EasyJet",
+    flightDuration: "3 hrs 55 mins",
+    frequency: "Daily during Summer (Apr - Oct)",
+    seasonality: "Direct Summer Season (Apr–Oct)",
+    priceIdeaLow: "£65 - £130",
+    priceIdeaPeak: "£180 - £310",
+    highlights: ["Closest airport to Altınkum (85 km)", "Frequent morning & afternoon slots", "Fast 60-min door-to-door transfer"],
+    skyscannerSearchUrl: "https://www.skyscanner.net/transport/flights/lond/bjv",
+    airlineSearchUrl: "https://www.easyjet.com/en/cheap-flights/turkey"
+  },
+  {
+    id: "manchester-bodrum-jet2",
+    originCity: "Manchester",
+    originCode: "MAN",
+    originCountry: "United Kingdom",
+    destinationCity: "Bodrum (Altınkum 60m)",
+    destinationAirport: "Milas-Bodrum Airport",
+    destinationCode: "BJV",
+    airlineId: "jet2",
+    airlineName: "Jet2.com",
+    flightDuration: "4 hrs 15 mins",
+    frequency: "4 - 6 flights per week",
+    seasonality: "Summer Season (Apr–Nov)",
+    priceIdeaLow: "£85 - £160",
+    priceIdeaPeak: "£210 - £360",
+    highlights: ["22kg luggage allowance included options", "Friendly UK cabin crew", "Direct transfer to Altınkum hotels"],
+    skyscannerSearchUrl: "https://www.skyscanner.net/transport/flights/man/bjv",
+    airlineSearchUrl: "https://www.jet2.com/destinations/turkey"
+  },
+  {
+    id: "birmingham-bodrum-tui",
+    originCity: "Birmingham",
+    originCode: "BHX",
+    originCountry: "United Kingdom",
+    destinationCity: "Bodrum (Altınkum 60m)",
+    destinationAirport: "Milas-Bodrum Airport",
+    destinationCode: "BJV",
+    airlineId: "tui",
+    airlineName: "TUI Airways",
+    flightDuration: "4 hrs 05 mins",
+    frequency: "2 - 3 flights per week",
+    seasonality: "Summer Charter Season (May–Oct)",
+    priceIdeaLow: "£90 - £170",
+    priceIdeaPeak: "£220 - £350",
+    highlights: ["Direct flight-only charter seats", "Ideal for Midlands travelers", "BJV terminal is compact and quick to exit"],
+    skyscannerSearchUrl: "https://www.skyscanner.net/transport/flights/bhx/bjv",
+    airlineSearchUrl: "https://www.tui.co.uk/flight/turkey-flights"
+  },
+  {
+    id: "london-izmir-sunexpress",
+    originCity: "London (Luton / Stansted)",
+    originCode: "LTN / STN",
+    originCountry: "United Kingdom",
+    destinationCity: "Izmir (Altınkum 90m)",
+    destinationAirport: "Izmir Adnan Menderes",
+    destinationCode: "ADB",
+    airlineId: "sunexpress",
+    airlineName: "SunExpress",
+    flightDuration: "3 hrs 50 mins",
+    frequency: "5 flights per week to Daily",
+    seasonality: "Year-Round & High Frequency Summer",
+    priceIdeaLow: "£70 - £140",
+    priceIdeaPeak: "£190 - £320",
+    highlights: ["Lufthansa-backed scheduled reliability", "Direct Havaş airport bus connects to Didim", "Year-round availability"],
+    skyscannerSearchUrl: "https://www.skyscanner.net/transport/flights/lond/adb",
+    airlineSearchUrl: "https://www.sunexpress.com/en"
+  },
+  {
+    id: "frankfurt-izmir-sunexpress",
+    originCity: "Frankfurt am Main",
+    originCode: "FRA",
+    originCountry: "Germany",
+    destinationCity: "Izmir (Altınkum 90m)",
+    destinationAirport: "Izmir Adnan Menderes",
+    destinationCode: "ADB",
+    airlineId: "sunexpress",
+    airlineName: "SunExpress",
+    flightDuration: "3 hrs 15 mins",
+    frequency: "Multiple Daily Direct Flights",
+    seasonality: "Daily 365 Days a Year",
+    priceIdeaLow: "€80 - €150",
+    priceIdeaPeak: "€180 - €300",
+    highlights: ["Direct major German hub connection", "Highest frequency route into Aegean", "Fast customs and baggage claim"],
+    skyscannerSearchUrl: "https://www.skyscanner.net/transport/flights/fra/adb",
+    airlineSearchUrl: "https://www.sunexpress.com/en"
+  },
+  {
+    id: "munich-bodrum-condor",
+    originCity: "Munich / Düsseldorf",
+    originCode: "MUC / DUS",
+    originCountry: "Germany",
+    destinationCity: "Bodrum (Altınkum 60m)",
+    destinationAirport: "Milas-Bodrum Airport",
+    destinationCode: "BJV",
+    airlineId: "condor",
+    airlineName: "Condor",
+    flightDuration: "3 hrs 10 mins",
+    frequency: "3 - 5 flights per week",
+    seasonality: "Direct Summer Season (May–Oct)",
+    priceIdeaLow: "€85 - €160",
+    priceIdeaPeak: "€190 - €330",
+    highlights: ["Direct German charter connection", "Scenic flight over Aegean Greek archipelago", "Quick 60 min VIP taxi transfer"],
+    skyscannerSearchUrl: "https://www.skyscanner.net/transport/flights/muc/bjv",
+    airlineSearchUrl: "https://www.condor.com/eu/flights/turkey/"
+  },
+  {
+    id: "worldwide-izmir-turkishairlines",
+    originCity: "London / Worldwide (via Istanbul)",
+    originCode: "LHR / Worldwide",
+    originCountry: "Global Hubs",
+    destinationCity: "Izmir / Bodrum",
+    destinationAirport: "Izmir (ADB) & Bodrum (BJV)",
+    destinationCode: "ADB",
+    airlineId: "turkishairlines",
+    airlineName: "Turkish Airlines",
+    flightDuration: "5 hrs 30 mins (inc. connection)",
+    frequency: "Multiple Daily Flights (Year-Round)",
+    seasonality: "Year-Round 365 Days",
+    priceIdeaLow: "£110 - £200",
+    priceIdeaPeak: "£240 - £390",
+    highlights: ["Complimentary hot meals & drinks", "23-30kg checked baggage included", "Access from any global airport"],
+    skyscannerSearchUrl: "https://www.skyscanner.net/transport/flights/lond/adb",
+    airlineSearchUrl: "https://www.turkishairlines.com/en-gb/flights/"
+  },
+  {
+    id: "bristol-bodrum-easyjet",
+    originCity: "Bristol / South West",
+    originCode: "BRS",
+    originCountry: "United Kingdom",
+    destinationCity: "Bodrum (Altınkum 60m)",
+    destinationAirport: "Milas-Bodrum Airport",
+    destinationCode: "BJV",
+    airlineId: "easyjet",
+    airlineName: "EasyJet",
+    flightDuration: "4 hrs 00 mins",
+    frequency: "2 - 3 flights per week",
+    seasonality: "Direct Summer Season (May–Oct)",
+    priceIdeaLow: "£75 - £145",
+    priceIdeaPeak: "£195 - £320",
+    highlights: ["Direct South West UK gateway", "Quick transfer to Altınkum & Didim", "Great early morning flight slots"],
+    skyscannerSearchUrl: "https://www.skyscanner.net/transport/flights/brs/bjv",
+    airlineSearchUrl: "https://www.easyjet.com/en/cheap-flights/turkey"
+  },
+  {
+    id: "scotland-bodrum-jet2",
+    originCity: "Edinburgh / Glasgow",
+    originCode: "EDI / GLA",
+    originCountry: "United Kingdom (Scotland)",
+    destinationCity: "Bodrum (Altınkum 60m)",
+    destinationAirport: "Milas-Bodrum Airport",
+    destinationCode: "BJV",
+    airlineId: "jet2",
+    airlineName: "Jet2.com",
+    flightDuration: "4 hrs 35 mins",
+    frequency: "2 - 4 flights per week",
+    seasonality: "Summer Season (May–Oct)",
+    priceIdeaLow: "£95 - £175",
+    priceIdeaPeak: "£230 - £370",
+    highlights: ["Direct flights from Scotland to the Aegean", "22kg bag allowance options", "Superb Scottish holidaymaker favorite"],
+    skyscannerSearchUrl: "https://www.skyscanner.net/transport/flights/edi/bjv",
+    airlineSearchUrl: "https://www.jet2.com/destinations/turkey"
+  }
+];
+
+export const SKYSCANNER_META = {
+  name: "Skyscanner",
+  tagline: "Global flight comparison engine — compare all airlines in one single search",
+  mainUrl: "https://www.skyscanner.net",
+  bjvSearchUrl: "https://www.skyscanner.net/transport/flights/uk/bjv",
+  adbSearchUrl: "https://www.skyscanner.net/transport/flights/uk/adb",
+  description: "Skyscanner compares live airfares across EasyJet, Jet2, TUI, SunExpress, Turkish Airlines, Condor, and hundreds of online travel agents so you can find the lowest price and best flight times.",
+  tips: [
+    "Use Skyscanner's 'Whole Month' search tool to spot the absolute cheapest departure date.",
+    "Set up a Skyscanner Price Alert to get notified when flight prices to Bodrum (BJV) or Izmir (ADB) drop.",
+    "Search both Milas-Bodrum (BJV) and Izmir (ADB) to find the best balance between ticket price and flight schedule."
+  ]
+};
+
+

@@ -10,6 +10,7 @@ import DiningAndNightlife from '@/components/DiningAndNightlife';
 import HotelsGuide from '@/components/HotelsGuide';
 import DayTripsAndActivities from '@/components/DayTripsAndActivities';
 import VisitorEssentialsHub from '@/components/VisitorEssentialsHub';
+import FlightSearchAndGuide from '@/components/FlightSearchAndGuide';
 import TravelGuideAndTransport from '@/components/TravelGuideAndTransport';
 import AdvertisePortal from '@/components/AdvertisePortal';
 import FaqSection from '@/components/FaqSection';
@@ -31,6 +32,7 @@ export default function HomePage() {
         <HotelsGuide />
         <DayTripsAndActivities />
         <VisitorEssentialsHub />
+        <FlightSearchAndGuide />
         <TravelGuideAndTransport />
         <AdvertisePortal />
         <FaqSection />

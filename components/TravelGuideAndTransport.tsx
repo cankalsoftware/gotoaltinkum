@@ -64,8 +64,17 @@ export default function TravelGuideAndTransport() {
               </div>
             </div>
 
-            <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-slate-200 text-xs text-slate-500">
-              💡 Tip: Pre-booked private transfers take you directly to your hotel door.
+            <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-slate-200 flex flex-col gap-2">
+              <a
+                href="#flights"
+                className="inline-flex items-center justify-between text-xs font-bold text-sky-700 hover:text-sky-800 bg-sky-50 hover:bg-sky-100 p-2.5 rounded-xl border border-sky-200 transition-colors"
+              >
+                <span>Search Flights & Major Airlines ➔</span>
+                <span className="text-[10px] bg-sky-200 text-sky-800 px-1.5 py-0.5 rounded font-bold">Skyscanner & Jet2</span>
+              </a>
+              <div className="text-[11px] text-slate-500">
+                💡 Tip: Pre-booked private transfers take you directly to your hotel door.
+              </div>
             </div>
           </div>
 

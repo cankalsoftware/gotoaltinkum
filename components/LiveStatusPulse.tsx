@@ -85,21 +85,40 @@ export default function LiveStatusPulse() {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [justRefreshed, setJustRefreshed] = useState(false);
   const [lastCheckTime, setLastCheckTime] = useState<Date>(new Date());
   const [secondsAgo, setSecondsAgo] = useState(0);
   const [showTerminal, setShowTerminal] = useState(false);
+
+  // Helper to format friendly relative elapsed time
+  const getRelativeTimeText = (sec: number) => {
+    if (sec < 30) return 'just now';
+    if (sec < 90) return '1 min ago';
+    if (sec < 3600) return `${Math.floor(sec / 60)}m ago`;
+    const hours = Math.floor(sec / 3600);
+    const mins = Math.floor((sec % 3600) / 60);
+    return `${hours}h ${mins}m ago`;
+  };
 
   // Fetch live stats from API
   const fetchLiveTelemetry = useCallback(async (isManual = false) => {
     setIsLoading(true);
     const pingStart = Date.now();
     try {
-      const res = await fetch(`/api/live-stats?t=${Date.now()}`);
+      // Add cache buster when manually requested
+      const res = await fetch(`/api/live-stats?t=${Date.now()}`, {
+        cache: isManual ? 'no-store' : 'default',
+      });
       if (res.ok) {
         const json: LiveData = await res.json();
         setData(json);
         setLastCheckTime(new Date());
         setSecondsAgo(0);
+
+        if (isManual) {
+          setJustRefreshed(true);
+          setTimeout(() => setJustRefreshed(false), 3000);
+        }
 
         const timeStr = json.didimLocalTime || new Date().toLocaleTimeString();
         console.log(
@@ -115,12 +134,13 @@ export default function LiveStatusPulse() {
     }
   }, []);
 
-  // Initial load and periodic polling (every 60s)
+  // Initial load and periodic polling (every 60 minutes = 3,600,000 ms to protect server load)
   useEffect(() => {
     fetchLiveTelemetry();
+    const POLLING_INTERVAL_MS = 60 * 60 * 1000; // 60 minutes
     const interval = setInterval(() => {
       fetchLiveTelemetry();
-    }, 60000);
+    }, POLLING_INTERVAL_MS);
 
     const timerInterval = setInterval(() => {
       setSecondsAgo((prev) => prev + 1);
@@ -158,28 +178,41 @@ export default function LiveStatusPulse() {
                   <Activity className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-emerald-400 animate-pulse" />
                   <span>Real-Time</span>
                 </span>
+                <span className="hidden md:inline-flex bg-sky-950/80 text-sky-300 text-[9px] sm:text-[10px] font-medium px-2 py-0.5 rounded-full border border-sky-800/60">
+                  Auto-sync: 60m interval
+                </span>
               </div>
               <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">
-                Meteorological sensors & FX feeds • Checked {secondsAgo === 0 ? 'just now' : `${secondsAgo}s ago`}
+                Meteorological sensors & FX feeds • Updated <span className="text-cyan-300 font-semibold">{getRelativeTimeText(secondsAgo)}</span> • Click below for instant update
               </p>
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center gap-2 self-start sm:self-auto">
+          <div className="flex items-center gap-2 self-start sm:self-auto flex-wrap">
             <button
               onClick={() => fetchLiveTelemetry(true)}
               disabled={isLoading}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 border border-white/20 text-xs font-semibold text-slate-200 hover:text-white transition-all shadow-sm"
-              title="Click to perform an instant live sensor and exchange check"
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all shadow-md active:scale-95 border cursor-pointer ${
+                justRefreshed
+                  ? 'bg-emerald-600 text-white border-emerald-400 ring-2 ring-emerald-400/40'
+                  : 'bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 text-white border-sky-400/30 hover:border-sky-300'
+              }`}
+              title="Click to perform an instant live sensor and exchange rate update with fresh data"
             >
-              <RefreshCw className={`w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-400 ${isLoading ? 'animate-spin' : ''}`} />
-              <span>{isLoading ? 'Checking...' : 'Ping Live'}</span>
+              <RefreshCw className={`w-3.5 h-3.5 text-white ${isLoading ? 'animate-spin' : ''}`} />
+              <span>
+                {isLoading 
+                  ? 'Fetching Live Data...' 
+                  : justRefreshed 
+                    ? 'Updated Just Now ✓' 
+                    : 'Get Latest Update'}
+              </span>
             </button>
 
             <button
               onClick={() => setShowTerminal(!showTerminal)}
-              className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold transition-all border ${
+              className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
                 showTerminal 
                   ? 'bg-cyan-500/20 text-cyan-300 border-cyan-400/40' 
                   : 'bg-slate-800 hover:bg-slate-700 text-slate-300 border-slate-700'
@@ -187,7 +220,7 @@ export default function LiveStatusPulse() {
               title="Toggle Live Diagnostic & Telemetry Log Feed"
             >
               <Terminal className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400" />
-              <span className="hidden xs:inline">Logs</span>
+              <span className="hidden xs:inline">Telemetry Logs</span>
               {showTerminal ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
             </button>
           </div>

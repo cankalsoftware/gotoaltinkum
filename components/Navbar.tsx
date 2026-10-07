@@ -75,6 +75,7 @@ export default function Navbar({ onOpenAdvertiseModal }: NavbarProps) {
     { label: 'Aegean Dining', href: '#dining' },
     { label: 'Hotels & Resorts', href: '#hotels' },
     { label: 'Day Trips', href: '#day-trips' },
+    { label: 'Flights', href: '#flights' },
     { label: 'Travel Guide', href: '#travel-guide' },
     { label: 'FAQ', href: '#faq' },
   ];
