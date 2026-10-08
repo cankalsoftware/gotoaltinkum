@@ -114,10 +114,14 @@ export default function CookieConsentBanner() {
 
   return (
     <>
-      {/* Floating Bottom Consent Banner */}
+      {/* Floating Bottom Consent Banner (Standard CMP & Google Consent Mode v2) */}
       {showBanner && !showModal && (
         <aside 
-          aria-label="Cookie consent banner"
+          id="cookie-consent-banner"
+          data-cmp="consent-manager"
+          data-consent-mode="v2"
+          role="region"
+          aria-label="Cookie and Privacy Consent Banner"
           className="fixed bottom-3 sm:bottom-4 inset-x-3 sm:inset-x-6 max-w-4xl mx-auto z-50 bg-slate-950/95 backdrop-blur-xl border border-sky-500/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-white shadow-2xl shadow-sky-950/80 animate-slideUp"
         >
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -130,11 +134,11 @@ export default function CookieConsentBanner() {
                   Cookie & Privacy Choices on GoToAltinkum
                 </h3>
                 <span className="text-[10px] font-bold bg-sky-950 text-cyan-300 border border-cyan-500/30 px-2 py-0.5 rounded-full">
-                  GDPR & KVKK Compliant
+                  UK GDPR, PECR & KVKK Compliant
                 </span>
               </div>
               <p className="text-xs text-slate-300 leading-relaxed">
-                We use strictly necessary cookies to ensure portal security and functionality. With your consent, we also use analytics and partner referral tracking to measure site traffic and support our free guide. We do not sell personal data.
+                We use strictly necessary cookies for portal security. With your consent, we use anonymous analytics and partner referral tracking to support our free guide. We do not sell personal data. Non-essential cookies are blocked by default until you choose to opt in.
               </p>
               <div className="flex items-center gap-3 text-[11px] text-cyan-300 pt-0.5">
                 <Link href="/cookies" className="underline hover:text-white transition-colors">
@@ -153,6 +157,7 @@ export default function CookieConsentBanner() {
 
             <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 shrink-0">
               <button
+                id="cookie-consent-customize-btn"
                 onClick={() => setShowModal(true)}
                 className="w-full sm:w-auto px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-700 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
               >
@@ -161,6 +166,7 @@ export default function CookieConsentBanner() {
               </button>
 
               <button
+                id="cookie-consent-reject-btn"
                 onClick={handleRejectNonEssential}
                 className="w-full sm:w-auto px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:text-white bg-white/10 hover:bg-white/20 border border-white/15 transition-all cursor-pointer"
               >
@@ -168,6 +174,7 @@ export default function CookieConsentBanner() {
               </button>
 
               <button
+                id="cookie-consent-accept-btn"
                 onClick={handleAcceptAll}
                 className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-400 to-amber-300 hover:from-amber-300 hover:to-amber-200 transition-all shadow-md active:scale-98 cursor-pointer"
               >

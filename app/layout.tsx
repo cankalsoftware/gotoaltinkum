@@ -109,6 +109,42 @@ export default function RootLayout({
       <head>
         <StructuredData />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+        {/* Google Consent Mode v2 (PECR & UK GDPR Mandatory Default Denied) */}
+        <script
+          id="google-consent-mode-v2"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+
+              // 1. Establish Consent Mode v2 default state as 'denied' BEFORE any tags load
+              gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'functionality_storage': 'granted',
+                'security_storage': 'granted',
+                'wait_for_update': 500
+              });
+
+              // 2. Check for returning visitor saved consent in localStorage
+              try {
+                var stored = localStorage.getItem('gotoaltinkum_cookie_consent_v1');
+                if (stored) {
+                  var p = JSON.parse(stored);
+                  gtag('consent', 'update', {
+                    'analytics_storage': p.analytics ? 'granted' : 'denied',
+                    'ad_storage': p.marketing ? 'granted' : 'denied',
+                    'ad_user_data': p.marketing ? 'granted' : 'denied',
+                    'ad_personalization': p.marketing ? 'granted' : 'denied'
+                  });
+                }
+              } catch(e) {}
+            `,
+          }}
+        />
       </head>
       <body className="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased selection:bg-amber-400 selection:text-slate-950">
         {/* Google Analytics (GA4) */}
@@ -126,6 +162,7 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', '${GA_MEASUREMENT_ID}', {
               page_path: window.location.pathname,
+              anonymize_ip: true,
             });
           `}
         </Script>
